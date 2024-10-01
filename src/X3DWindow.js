@@ -22,11 +22,38 @@ class X3DWindow
 
    update ()
    {
-      const isX3D = vscode .window .activeTextEditor .document .languageId === "X3D";
+      vscode .commands .executeCommand ("setContext", "x3dFileActive", this .isX3D ());
+   }
 
-      console .log (vscode .window .activeTextEditor .document .languageId, isX3D)
+   isX3D ()
+   {
+      const textEditor = vscode .window .activeTextEditor;
 
-      vscode .commands .executeCommand ("setContext", "x3dFileActive", isX3D);
+      switch (textEditor .document .languageId)
+      {
+         case "X3D":
+         {
+            return true;
+         }
+         case "xml":
+         {
+            if (textEditor .document .getText () .includes ("<!DOCTYPE X3D"))
+               return true;
+
+            return false;
+         }
+         case "json":
+         {
+            if (textEditor .document .getText () .match (/^\s*{\s*"X3D"\s*:/s))
+               return true;
+
+            return false;
+         }
+         default:
+         {
+            return false;
+         }
+      }
    }
 }
 
