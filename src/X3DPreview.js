@@ -88,7 +88,21 @@ class X3DPreview
          <html>
          <head>
             <meta charset="utf-8">
-            <script defer src="https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.js"></script>
+            <script type="module">
+               import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
+
+               const Browser = X3D .getBrowser ();
+
+               Browser .getContextMenu () .setUserMenu (() =>
+               {
+                  return {
+                     "viewAll": {
+                        "name": "View All",
+                        "callback": () => Browser .viewAll (),
+                     },
+                  };
+               });
+            </script>
             <style>
                html, body, x3d-canvas {
                   margin: 0;
