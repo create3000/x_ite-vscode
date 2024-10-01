@@ -22,22 +22,28 @@ class X3DWindow
 
    didChangeActiveTextEditor ()
    {
-      vscode .commands .executeCommand ("setContext", "x3dFileActive", this .isX3D ());
+      vscode .commands .executeCommand ("setContext", "x3dFileActive", this .isX_ITE ());
    }
 
-   isX3D ()
+   isX_ITE ()
    {
       const textEditor = vscode .window .activeTextEditor;
+
+      console .log (textEditor .document .languageId)
 
       switch (textEditor .document .languageId)
       {
          case "X3D":
+         case "wavefront-obj":
          {
             return true;
          }
          case "xml":
          {
-            if (textEditor .document .getText () .match (/<!DOCTYPE\s+X3D/s))
+            if (textEditor .document .getText () .includes ("<X3D"))
+               return true;
+
+            if (textEditor .document .getText () .includes ("<svg"))
                return true;
 
             return false;
