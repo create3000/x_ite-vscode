@@ -18,7 +18,7 @@ function activate (context)
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode .commands .registerCommand ('x_ite-vscode.helloWorld', function ()
+	const disposable = vscode .commands .registerCommand ('x_ite-vscode.preview-model', function ()
 	{
 		// The code you place here will be executed every time your command is executed
 
