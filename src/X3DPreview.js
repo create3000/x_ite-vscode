@@ -58,8 +58,8 @@ class X3DPreview
 
       panel .onDidDispose (() =>
       {
-         // this .unwatchFiles (panel);
          this .#panels .delete (filePath);
+         // this .unwatchFiles (panel);
          // this .updateActivePanel ();
       });
 
