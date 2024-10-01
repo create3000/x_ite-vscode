@@ -14,6 +14,7 @@ class X3DWindow
       vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .didChangeActiveTextEditor ()));
 
       this .didChangeActiveTextEditor ();
+      setTimeout (() => this .didChangeActiveTextEditor (), 1000);
    }
 
    get preview ()
@@ -53,6 +54,13 @@ class X3DWindow
          {
             if (textEditor .document .getText () .match (/^\s*{\s*"X3D"\s*:/s))
                return true;
+
+            switch (path .extname (textEditor .document .fileName))
+            {
+               case ".x3dj":
+               case ".gltf":
+                  return true;
+            }
 
             return false;
          }
