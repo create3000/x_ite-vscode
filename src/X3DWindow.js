@@ -54,8 +54,6 @@ class X3DWindow
             if (textEditor .document .getText () .match (/^\s*{\s*"X3D"\s*:/s))
                return true;
 
-            // console .log (path .extname (textEditor .document .fileName))
-
             return false;
          }
          case "plaintext":
