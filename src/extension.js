@@ -45,7 +45,7 @@ function activate (context)
 	{
 		// The code you place here will be executed every time your command is executed
 
-		const textEditor = vscode.window.activeTextEditor;
+		const textEditor = vscode .window .activeTextEditor;
 
 		if (!checkValidEditor (textEditor))
 			return;
