@@ -28,12 +28,6 @@
     "onLanguage:plaintext"
   ],
   "main": "./src/extension.js",
-  "contributes": {
-    "commands": [{
-      "command": "x_ite-vscode.preview-model",
-      "title": "X3D: Preview 3D Model"
-    }]
-  },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
