@@ -14,7 +14,6 @@ class X3DWindow
       vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .didChangeActiveTextEditor ()));
 
       this .didChangeActiveTextEditor ();
-      setTimeout (() => this .didChangeActiveTextEditor (), 1000);
    }
 
    get preview ()
@@ -24,14 +23,14 @@ class X3DWindow
 
    didChangeActiveTextEditor ()
    {
+      console .log (this .isX_ITE ());
+
       vscode .commands .executeCommand ("setContext", "x3dFileActive", this .isX_ITE ());
    }
 
    isX_ITE ()
    {
       const textEditor = vscode .window .activeTextEditor;
-
-      console .log (textEditor .document .languageId)
 
       switch (textEditor .document .languageId)
       {
@@ -42,17 +41,21 @@ class X3DWindow
          }
          case "xml":
          {
-            if (textEditor .document .getText () .includes ("<X3D"))
+            const text = textEditor .document .getText () ;
+
+            if (text .includes ("<X3D"))
                return true;
 
-            if (textEditor .document .getText () .includes ("<svg"))
+            if (text .includes ("<svg"))
                return true;
 
             return false;
          }
          case "json":
          {
-            if (textEditor .document .getText () .match (/^\s*{\s*"X3D"\s*:/s))
+            const text = textEditor .document .getText () ;
+
+            if (text .match (/^\s*{\s*"X3D"\s*:/s))
                return true;
 
             switch (path .extname (textEditor .document .fileName))

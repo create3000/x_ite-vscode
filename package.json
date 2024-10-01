@@ -22,7 +22,10 @@
     "Debuggers"
   ],
   "activationEvents": [
-    "onLanguage:X3D"
+    "onLanguage:X3D",
+    "onLanguage:xml",
+    "onLanguage:json",
+    "onLanguage:plaintext"
   ],
   "main": "./src/extension.js",
   "contributes": {
