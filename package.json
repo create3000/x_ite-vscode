@@ -21,7 +21,9 @@
   "categories": [
     "Debuggers"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:X3D"
+  ],
   "main": "./src/extension.js",
   "contributes": {
     "commands": [{
@@ -41,5 +43,48 @@
     "eslint": "^9.11.1",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "x_ite-vscode.preview-model",
+        "title": "X3D: Preview 3D Model",
+        "icon": {
+          "dark": "./resources/icon.png",
+          "light": "./resources/icon.png"
+        }
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "x_ite-vscode.preview-model",
+        "key": "alt+g",
+        "mac": "alt+g",
+        "when": "editorTextFocus && x3dFileActive"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "x_ite-vscode.preview-model",
+          "when": "x3dFileActive",
+          "group": "X3D"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "x_ite-vscode.preview-model",
+          "when": "x3dFileActive",
+          "group": "navigation"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "x_ite-vscode.preview-model",
+          "when": "x3dFileActive",
+          "group": "X3D"
+        }
+      ]
+    }
   }
 }

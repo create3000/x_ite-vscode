@@ -1,6 +1,5 @@
 const
    vscode = require ("vscode"),
-   url    = require ("url"),
    path   = require ("path");
 
 class X3DPreview

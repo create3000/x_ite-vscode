@@ -1,4 +1,6 @@
-const X3DPreview = require ("./X3DPreview")
+const
+   X3DPreview = require ("./X3DPreview"),
+   vscode     = require ("vscode");
 
 class X3DWindow
 {
@@ -7,11 +9,24 @@ class X3DWindow
    constructor (context)
    {
       this .#preview = new X3DPreview (context);
+
+      vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .update ()));
+
+      this .update ();
    }
 
    get preview ()
    {
       return this .#preview;
+   }
+
+   update ()
+   {
+      const isX3D = vscode .window .activeTextEditor .document .languageId === "X3D";
+
+      console .log (vscode .window .activeTextEditor .document .languageId, isX3D)
+
+      vscode .commands .executeCommand ("setContext", "x3dFileActive", isX3D);
    }
 }
 
