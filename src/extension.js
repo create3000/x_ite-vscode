@@ -12,7 +12,7 @@ function checkValidEditor (textEditor)
 		{
 			if (choice === "More info")
 			{
-				let uri = vscode .Uri .parse ("https://github.com/AnalyticalGraphicsInc/gltf-vscode/blob/master/README.md#compatibiliy-and-known-size-limitations");
+				const uri = vscode .Uri .parse ("https://github.com/create3000/x_ite-vscode/blob/main/README.md");
 
 				vscode .commands .executeCommand ("vscode.open", uri);
 			}
@@ -34,7 +34,7 @@ function activate (context)
 {
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console .log ("Congratulations, your extension 'x-ite-vscode-extension' is now active!");
+	console .log ("Activated 'x_ite-vscode'.");
 
 	const x3dWindow = new X3DWindow (context);
 
@@ -47,13 +47,13 @@ function activate (context)
 
 		const textEditor = vscode .window .activeTextEditor;
 
-		if (!checkValidEditor (textEditor))
-			return;
+		// if (!checkValidEditor (textEditor))
+		// 	return;
 
-		// Display a message box to the user
-		vscode .window .showInformationMessage ("Hello World from X_ITE VS Code Extension!");
+		// // Display a message box to the user
+		// vscode .window .showInformationMessage ("Running 'X3D: Preview 3D Model'.");
 
-      // x3dWindow .preview .openPanel (textEditor);
+		x3dWindow .preview .openPanel (textEditor);
 	});
 
 	context .subscriptions .push (disposable);
