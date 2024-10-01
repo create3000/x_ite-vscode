@@ -12,7 +12,7 @@ class X3DWindow
 
       vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .update ()));
 
-      this .update ();
+      setImmediate (() => this .update ());
    }
 
    get preview ()
