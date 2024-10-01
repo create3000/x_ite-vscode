@@ -22,7 +22,7 @@
     "Debuggers"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [{
       "command": "x_ite-vscode.preview-model",
