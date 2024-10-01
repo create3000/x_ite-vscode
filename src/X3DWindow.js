@@ -30,7 +30,7 @@ class X3DWindow
    {
       const textEditor = vscode .window .activeTextEditor;
 
-      console .log (textEditor .document .languageId)
+      // console .log (textEditor .document .languageId)
 
       switch (textEditor .document .languageId)
       {
