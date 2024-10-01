@@ -37,7 +37,7 @@ class X3DWindow
          }
          case "xml":
          {
-            if (textEditor .document .getText () .includes ("<!DOCTYPE X3D"))
+            if (textEditor .document .getText () .match (/<!DOCTYPE\s+X3D/s))
                return true;
 
             return false;
