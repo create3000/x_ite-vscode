@@ -25,6 +25,7 @@
     "onLanguage:X3D",
     "onLanguage:xml",
     "onLanguage:json",
+    "onLanguage:wavefront-obj",
     "onLanguage:plaintext"
   ],
   "main": "./src/extension.js",
