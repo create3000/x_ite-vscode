@@ -31,7 +31,7 @@ class X3DWindow
    {
       const textEditor = vscode .window .activeTextEditor;
 
-      // console .log (textEditor .document .languageId)
+      console .log (textEditor .document .languageId)
 
       switch (textEditor .document .languageId)
       {
@@ -65,6 +65,22 @@ class X3DWindow
             return false;
          }
          case "plaintext":
+         {
+            switch (path .extname (textEditor .document .fileName))
+            {
+               case ".x3d":
+               case ".x3dv":
+               case ".x3dj":
+               case ".wrl":
+               case ".vrml":
+               case ".obj":
+               case ".ply":
+               case ".svg":
+                  return true;
+            }
+
+            return false;
+         }
          default:
          {
             return false;
