@@ -10,9 +10,9 @@ class X3DWindow
    {
       this .#preview = new X3DPreview (context);
 
-      vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .update ()));
+      vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .didChangeActiveTextEditor ()));
 
-      setImmediate (() => this .update ());
+      this .didChangeActiveTextEditor ();
    }
 
    get preview ()
@@ -20,7 +20,7 @@ class X3DWindow
       return this .#preview;
    }
 
-   update ()
+   didChangeActiveTextEditor ()
    {
       vscode .commands .executeCommand ("setContext", "x3dFileActive", this .isX3D ());
    }
