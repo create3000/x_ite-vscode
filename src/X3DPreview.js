@@ -26,9 +26,9 @@ class X3DPreview
       const panel = this .#panels .get (filePath)
          ?? this .createPanel (textEditor);
 
-      this .updatePanel (panel, filePath, content);
-
       panel .reveal (vscode .ViewColumn .Two);
+
+      this .updatePanel (panel, filePath, content);
 
       // this .setActivePanel (panel);
    }
