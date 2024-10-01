@@ -1,6 +1,7 @@
 const
    X3DPreview = require ("./X3DPreview"),
-   vscode     = require ("vscode");
+   vscode     = require ("vscode"),
+   path       = require ("path");
 
 class X3DWindow
 {
@@ -53,8 +54,11 @@ class X3DWindow
             if (textEditor .document .getText () .match (/^\s*{\s*"X3D"\s*:/s))
                return true;
 
+            // console .log (path .extname (textEditor .document .fileName))
+
             return false;
          }
+         case "plaintext":
          default:
          {
             return false;
