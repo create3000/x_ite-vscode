@@ -13,7 +13,7 @@ class X3DPanel
       this .#context = context;
    }
 
-   openPanel (textEditor)
+   openPreview (textEditor)
    {
       const
          filePath = textEditor .document .fileName,

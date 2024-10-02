@@ -29,7 +29,7 @@ function activate (context)
 		// // Display a message box to the user
 		// vscode .window .showInformationMessage ("Running 'X3D: Preview 3D Model'.");
 
-		x3dWindow .preview .openPanel (textEditor);
+		x3dWindow .panel .openPreview (textEditor);
 	});
 
 	context .subscriptions .push (disposable);

@@ -5,20 +5,20 @@ const
 
 class X3DWindow
 {
-   #preview;
+   #panel;
 
    constructor (context)
    {
-      this .#preview = new X3DPanel (context);
+      this .#panel = new X3DPanel (context);
 
       vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .didChangeActiveTextEditor ()));
 
       this .didChangeActiveTextEditor ();
    }
 
-   get preview ()
+   get panel ()
    {
-      return this .#preview;
+      return this .#panel;
    }
 
    didChangeActiveTextEditor ()
