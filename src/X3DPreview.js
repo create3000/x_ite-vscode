@@ -111,6 +111,7 @@ window .addEventListener ("message", async event =>
                positionOffset         = activeViewpoint ._positionOffset .copy (),
                orientationOffset      = activeViewpoint ._orientationOffset .copy (),
                centerOfRotationOffset = activeViewpoint ._centerOfRotationOffset .copy (),
+               fieldOfViewScale       = activeViewpoint ._fieldOfViewScale .getValue (),
                nearDistance           = activeViewpoint .nearDistance,
                farDistance            = activeViewpoint .farDistance;
          }
@@ -124,6 +125,7 @@ window .addEventListener ("message", async event =>
             activeViewpoint ._positionOffset         = positionOffset;
             activeViewpoint ._orientationOffset      = orientationOffset;
             activeViewpoint ._centerOfRotationOffset = centerOfRotationOffset;
+            activeViewpoint ._fieldOfViewScale       = fieldOfViewScale;
             activeViewpoint .nearDistance            = nearDistance,
             activeViewpoint .farDistance             = farDistance;
          }
