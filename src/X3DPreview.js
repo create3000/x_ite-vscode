@@ -9,15 +9,11 @@ class X3DPreview
 
    constructor (context)
    {
-      console .log ("Constructed preview.");
-
       this .#context = context;
    }
 
    openPanel (textEditor)
    {
-      console .log ("Called openPanel.");
-
       const
          filePath = textEditor .document .fileName,
          content  = textEditor .document .getText ();
@@ -76,7 +72,7 @@ class X3DPreview
       panel .webview .postMessage ({ command: "load-url", src: src .toString () });
    }
 
-   getWebviewContent (panel)
+   getWebviewContent ()
    {
       return /* html */ `<!DOCTYPE html>
 <html>
@@ -85,19 +81,19 @@ class X3DPreview
    <script type="module">
 import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
 
-const Browser = X3D .getBrowser ();
+const browser = X3D .getBrowser ();
 
-Browser .getContextMenu () .setUserMenu (() =>
+browser .getContextMenu () .setUserMenu (() =>
 {
    return {
       "viewAll": {
          "name": "View All",
-         "callback": () => Browser .viewAll (),
+         "callback": () => browser .viewAll (),
       },
    };
 });
 
-window .addEventListener ("message", event =>
+window .addEventListener ("message", async event =>
 {
    const data = event .data;
 
@@ -105,7 +101,33 @@ window .addEventListener ("message", event =>
    {
       case "load-url":
       {
-         Browser .loadURL (new X3D .MFString (data .src));
+         const
+            worldURL        = browser .getWorldURL (),
+            activeViewpoint = browser .getActiveViewpoint ();
+
+         if (activeViewpoint)
+         {
+            var
+               positionOffset         = activeViewpoint ._positionOffset .copy (),
+               orientationOffset      = activeViewpoint ._orientationOffset .copy (),
+               centerOfRotationOffset = activeViewpoint ._centerOfRotationOffset .copy (),
+               nearDistance           = activeViewpoint .nearDistance,
+               farDistance            = activeViewpoint .farDistance;
+         }
+
+         await browser .loadURL (new X3D .MFString (data .src));
+
+         if (browser .getWorldURL () === worldURL && activeViewpoint && browser .getActiveViewpoint ())
+         {
+            const activeViewpoint = browser .getActiveViewpoint ();
+
+            activeViewpoint ._positionOffset         = positionOffset;
+            activeViewpoint ._orientationOffset      = orientationOffset;
+            activeViewpoint ._centerOfRotationOffset = centerOfRotationOffset;
+            activeViewpoint .nearDistance            = nearDistance,
+            activeViewpoint .farDistance             = farDistance;
+         }
+
          break;
       }
    }

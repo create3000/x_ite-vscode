@@ -4,26 +4,6 @@ const
 	vscode    = require ("vscode"),
 	X3DWindow = require ("./X3DWindow");
 
-function checkValidEditor (textEditor)
-{
-	if (textEditor === undefined)
-	{
-		vscode .window .showErrorMessage (`Document too large (or no editor selected). Click 'More info' for details via GitHub.`, "More info") .then (choice =>
-		{
-			if (choice === "More info")
-			{
-				const uri = vscode .Uri .parse ("https://github.com/create3000/x_ite-vscode/blob/main/README.md");
-
-				vscode .commands .executeCommand ("vscode.open", uri);
-			}
-		});
-
-		return false;
-	}
-
-	return true;
-}
-
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 
@@ -32,10 +12,6 @@ function checkValidEditor (textEditor)
  */
 function activate (context)
 {
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console .log ("Activated 'x_ite-vscode'.");
-
 	const x3dWindow = new X3DWindow (context);
 
 	// The command has been defined in the package.json file
@@ -47,7 +23,7 @@ function activate (context)
 
 		const textEditor = vscode .window .activeTextEditor;
 
-		if (!checkValidEditor (textEditor))
+		if (!textEditor ?.document)
 			return;
 
 		// // Display a message box to the user

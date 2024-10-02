@@ -23,8 +23,6 @@ class X3DWindow
 
    didChangeActiveTextEditor ()
    {
-      console .log (this .isX_ITE ());
-
       vscode .commands .executeCommand ("setContext", "x_iteFileActive", this .isX_ITE ());
    }
 
@@ -32,7 +30,7 @@ class X3DWindow
    {
       const textEditor = vscode .window .activeTextEditor;
 
-      switch (textEditor .document .languageId)
+      switch (textEditor ?.document ?.languageId)
       {
          case "X3D":
          case "wavefront-obj":
