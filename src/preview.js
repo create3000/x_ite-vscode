@@ -8,6 +8,8 @@ class Preview
    {
       this .#browser = X3D .getBrowser ();
 
+      this .redirectConsoleMessages ();
+
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
       window .addEventListener ("message", event => this .receiveMessage (event));
@@ -83,27 +85,27 @@ class Preview
          activeViewpoint .farDistance             = farDistance;
       }
    }
+
+   redirectConsoleMessages ()
+   {
+      const vscode = acquireVsCodeApi ();
+
+      function output (log, command)
+      {
+         return function (... args)
+         {
+            log .apply (this, args);
+
+            vscode .postMessage ({ command, args: args .map (arg => String (arg)) });
+         }
+      }
+
+      console .log   = output (console .log,   "log");
+      console .info  = output (console .info,  "info");
+      console .warn  = output (console .warn,  "warn");
+      console .error = output (console .error, "error");
+      console .debug = output (console .debug, "debug");
+   }
 }
 
 const preview = new Preview ();
-
-(() =>
-{
-   const vscode = acquireVsCodeApi ();
-
-   function output (log, command)
-   {
-      return function (... args)
-      {
-         log .apply (this, args);
-
-         vscode .postMessage ({ command, args: args .map (arg => String (arg)) });
-      }
-   }
-
-   console .log   = output (console .log,   "log");
-   console .info  = output (console .info,  "info");
-   console .warn  = output (console .warn,  "warn");
-   console .error = output (console .error, "error");
-   console .debug = output (console .debug, "debug");
-})();
