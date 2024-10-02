@@ -97,7 +97,7 @@ class X3DPreview
             log .apply (this, args);
 
             vscode .postMessage ({ command, args: args .map (String) });
-         }
+         };
       }
 
       console .log   = output (console .log,   "log");
