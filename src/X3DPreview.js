@@ -1,6 +1,7 @@
 const
    vscode = require ("vscode"),
-   path   = require ("path");
+   path   = require ("path"),
+   fs     = require ("fs");
 
 class X3DPreview
 {
@@ -54,7 +55,7 @@ class X3DPreview
       panel .onDidDispose (() =>
       {
          this .#panels .delete (filePath);
-         // this .unwatchFiles (panel);
+         this .unwatchFiles (panel);
          // this .updateActivePanel ();
       });
 
@@ -70,6 +71,8 @@ class X3DPreview
       const src = panel .webview .asWebviewUri (vscode .Uri .file (filePath));
 
       panel .webview .postMessage ({ command: "load-url", src: src .toString () });
+
+      this .watchFiles (panel);
    }
 
    getWebviewContent ()
@@ -152,6 +155,26 @@ html, body, x3d-canvas {
    </x3d-canvas>
 </body>
 </html>`;
+   }
+
+   watchFiles (panel)
+   {
+      this .unwatchFiles (panel);
+
+      const
+         document = panel .textEditor .document,
+         filePath = document .fileName,
+         watcher  = fs .watch (filePath, () => this .updatePanel (panel, filePath));
+
+      panel .watchers .push (watcher);
+   }
+
+   unwatchFiles (panel)
+   {
+      for (const watcher of panel .watchers)
+         watcher .close ();
+
+      panel .watchers .length = 0;
    }
 }
 
