@@ -6,35 +6,37 @@ class Preview
 
    constructor ()
    {
-      const browser = X3D .getBrowser ();
+      this .#browser = X3D .getBrowser ();
 
-      this .#browser = browser;
-
-      browser .getContextMenu () .setUserMenu (() =>
-      {
-         return {
-            browserUpdate: {
-               name: "Browser Update",
-               type: "checkbox",
-               selected: browser .isLive (),
-               events: {
-                  click: (event) =>
-                  {
-                     if ($(event .target) .is (":checked"))
-                        browser .beginUpdate ();
-                     else
-                     browser .endUpdate ();
-                  },
-               },
-            },
-            viewAll: {
-               name: "View All",
-               callback: () => browser .viewAll (),
-            },
-         };
-      });
+      this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
       window .addEventListener ("message", event => this .receiveMessage (event));
+   }
+
+   createUserMenu ()
+   {
+      const browser = this .#browser;
+
+      return {
+         browserUpdate: {
+            name: "Browser Update",
+            type: "checkbox",
+            selected: browser .isLive (),
+            events: {
+               click: (event) =>
+               {
+                  if ($(event .target) .is (":checked"))
+                     browser .beginUpdate ();
+                  else
+                     browser .endUpdate ();
+               },
+            },
+         },
+         viewAll: {
+            name: "View All",
+            callback: () => browser .viewAll (),
+         },
+      };
    }
 
    receiveMessage ({ data })
