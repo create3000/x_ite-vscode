@@ -79,7 +79,7 @@ class X3DPreview
 
    getWebviewContent (panel)
    {
-      const script = panel .webview .asWebviewUri (vscode .Uri .file (path .resolve (__dirname, "x_ite.js")));
+      const script = panel .webview .asWebviewUri (vscode .Uri .file (path .resolve (__dirname, "preview.js")));
 
       return /* html */ `<!DOCTYPE html>
 <html>
