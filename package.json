@@ -2,12 +2,17 @@
   "name": "x_ite-vscode",
   "displayName": "X_ITE VS Code Extension",
   "description": "Preview and debug X3D, glTF, VRML and other 3D models directly in the editor.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "repository": {
-      "url": "https://github.com/create3000/x_ite-vscode"
+    "url": "https://github.com/create3000/x_ite-vscode"
   },
   "keywords": [
     "X3D",
+    "VRML",
+    "glTF",
+    "OBJ",
+    "PLY",
+    "SVG",
     "3D",
     "model"
   ],
@@ -56,8 +61,8 @@
     "keybindings": [
       {
         "command": "x_ite-vscode.preview-model",
-        "key": "alt+g",
-        "mac": "alt+g",
+        "key": "alt+x",
+        "mac": "alt+x",
         "when": "editorTextFocus && x_iteFileActive"
       }
     ],
