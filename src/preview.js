@@ -37,10 +37,8 @@ class Preview
       window .addEventListener ("message", event => this .receiveMessage (event));
    }
 
-   receiveMessage (event)
+   receiveMessage ({ data })
    {
-      const data = event .data;
-
       switch (data .command)
       {
          case "load-url":
