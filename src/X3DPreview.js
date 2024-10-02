@@ -52,6 +52,8 @@ class X3DPreview
       panel .watchers      = [ ];
       panel .webview .html = this .getWebviewContent (panel);
 
+      panel .webview .onDidReceiveMessage (message => this .didReceiveMessage (message), undefined, this .#context .subscriptions);
+
       panel .onDidDispose (() =>
       {
          this .#panels .delete (filePath);
@@ -152,6 +154,27 @@ window .addEventListener ("message", async event =>
       }
    }
 });
+
+(() =>
+{
+   const vscode = acquireVsCodeApi ();
+
+   function output (log, command)
+   {
+      return function (... args)
+      {
+         log .apply (this, args);
+
+         vscode .postMessage ({ command, args: args .map (arg => String (arg)) });
+      }
+   }
+
+   console .log   = output (console .log,   "log");
+   console .info  = output (console .info,  "info");
+   console .warn  = output (console .warn,  "warn");
+   console .error = output (console .error, "error");
+   console .debug = output (console .debug, "debug");
+})();
    </script>
    <style>
 html, body, x3d-canvas {
@@ -190,6 +213,22 @@ html, body, x3d-canvas {
          watcher .close ();
 
       panel .watchers .length = 0;
+   }
+
+   didReceiveMessage (message)
+   {
+      switch (message .command)
+      {
+         case "log":
+         case "info":
+         case "warn":
+         case "error":
+         case "debug":
+         {
+            console [message .command] (... message .args);
+            return;
+         }
+      }
    }
 }
 
