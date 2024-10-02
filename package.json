@@ -58,28 +58,28 @@
         "command": "x_ite-vscode.preview-model",
         "key": "alt+g",
         "mac": "alt+g",
-        "when": "editorTextFocus && x3dFileActive"
+        "when": "editorTextFocus && x_iteFileActive"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "command": "x_ite-vscode.preview-model",
-          "when": "x3dFileActive",
+          "when": "x_iteFileActive",
           "group": "X3D"
         }
       ],
       "editor/title": [
         {
           "command": "x_ite-vscode.preview-model",
-          "when": "x3dFileActive",
+          "when": "x_iteFileActive",
           "group": "navigation"
         }
       ],
       "editor/title/context": [
         {
           "command": "x_ite-vscode.preview-model",
-          "when": "x3dFileActive",
+          "when": "x_iteFileActive",
           "group": "X3D"
         }
       ]

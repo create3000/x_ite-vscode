@@ -25,7 +25,7 @@ class X3DWindow
    {
       console .log (this .isX_ITE ());
 
-      vscode .commands .executeCommand ("setContext", "x3dFileActive", this .isX_ITE ());
+      vscode .commands .executeCommand ("setContext", "x_iteFileActive", this .isX_ITE ());
    }
 
    isX_ITE ()
@@ -58,31 +58,26 @@ class X3DWindow
             if (text .match (/^\s*{\s*"X3D"\s*:/s))
                return true;
 
-            switch (path .extname (textEditor .document .fileName))
-            {
-               case ".x3dj":
-               case ".gltf":
-                  return true;
-            }
-
-            return false;
+            return [
+               ".x3dj",
+               ".gltf",
+            ]
+            .includes (path .extname (textEditor .document .fileName));
          }
          case "plaintext":
          {
-            switch (path .extname (textEditor .document .fileName))
-            {
-               case ".x3d":
-               case ".x3dv":
-               case ".x3dj":
-               case ".wrl":
-               case ".vrml":
-               case ".obj":
-               case ".ply":
-               case ".svg":
-                  return true;
-            }
-
-            return false;
+            return [
+               ".x3d",
+               ".x3dv",
+               ".x3dj",
+               ".wrl",
+               ".vrml",
+               ".gltf",
+               ".obj",
+               ".ply",
+               ".svg",
+            ]
+            .includes (path .extname (textEditor .document .fileName));
          }
          default:
          {
