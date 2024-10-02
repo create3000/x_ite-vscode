@@ -48,8 +48,8 @@ class X3DPreview
       });
 
       panel .title         = `X3D Preview [${basename}]`;
-      panel .watchers      = [ ];
       panel .textEditor    = textEditor;
+      panel .watchers      = [ ];
       panel .webview .html = this .getWebviewContent (panel);
 
       panel .onDidDispose (() =>
