@@ -2,6 +2,8 @@
 
 ## Preview and debug X3D, glTF, VRML and other 3D models directly in the editor.
 
+This extension integrates the [X_ITE X3D Browser](https://create3000.github.io/x_ite/) into VS Code.
+
 ![X3D Logo Pieces](images/logo-pieces.png)
 
 Command name: `X3D: Preview 3D Model`, default key binding: <kbd>ALT</kbd> + <kbd>X</kbd>
