@@ -1,7 +1,7 @@
 const
-   X3DPreview = require ("./X3DPreview"),
-   vscode     = require ("vscode"),
-   path       = require ("path");
+   X3DPanel = require ("./X3DPanel"),
+   vscode   = require ("vscode"),
+   path     = require ("path");
 
 class X3DWindow
 {
@@ -9,7 +9,7 @@ class X3DWindow
 
    constructor (context)
    {
-      this .#preview = new X3DPreview (context);
+      this .#preview = new X3DPanel (context);
 
       vscode .window .onDidChangeActiveTextEditor (() => setImmediate (() => this .didChangeActiveTextEditor ()));
 
