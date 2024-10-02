@@ -1,72 +1,91 @@
 import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
 
-const browser = X3D .getBrowser ();
-
-browser .getContextMenu () .setUserMenu (() =>
+class Preview
 {
-   return {
-      browserUpdate: {
-         name: "Browser Update",
-         type: "checkbox",
-         selected: browser .isLive (),
-         events: {
-            click: (event) =>
-            {
-               if ($(event .target) .is (":checked"))
-                  browser .beginUpdate ();
-               else
-                  browser .endUpdate ();
-            },
-         },
-      },
-      viewAll: {
-         name: "View All",
-         callback: () => browser .viewAll (),
-      },
-   };
-});
+   #browser;
 
-window .addEventListener ("message", async event =>
-{
-   const data = event .data;
-
-   switch (data .command)
+   constructor ()
    {
-      case "load-url":
+      const browser = X3D .getBrowser ();
+
+      this .#browser = browser;
+
+      browser .getContextMenu () .setUserMenu (() =>
       {
-         const
-            worldURL        = browser .getWorldURL (),
-            activeViewpoint = browser .getActiveViewpoint ();
+         return {
+            browserUpdate: {
+               name: "Browser Update",
+               type: "checkbox",
+               selected: browser .isLive (),
+               events: {
+                  click: (event) =>
+                  {
+                     if ($(event .target) .is (":checked"))
+                        browser .beginUpdate ();
+                     else
+                     browser .endUpdate ();
+                  },
+               },
+            },
+            viewAll: {
+               name: "View All",
+               callback: () => browser .viewAll (),
+            },
+         };
+      });
 
-         if (activeViewpoint)
+      window .addEventListener ("message", event => this .receiveMessage (event));
+   }
+
+   receiveMessage (event)
+   {
+      const data = event .data;
+
+      switch (data .command)
+      {
+         case "load-url":
          {
-            var
-               positionOffset         = activeViewpoint ._positionOffset .copy (),
-               orientationOffset      = activeViewpoint ._orientationOffset .copy (),
-               centerOfRotationOffset = activeViewpoint ._centerOfRotationOffset .copy (),
-               fieldOfViewScale       = activeViewpoint ._fieldOfViewScale .getValue (),
-               nearDistance           = activeViewpoint .nearDistance,
-               farDistance            = activeViewpoint .farDistance;
+            this .loadURL (data .src)
+            break;
          }
-
-         await browser .loadURL (new X3D .MFString (data .src));
-
-         if (browser .getWorldURL () === worldURL && activeViewpoint && browser .getActiveViewpoint ())
-         {
-            const activeViewpoint = browser .getActiveViewpoint ();
-
-            activeViewpoint ._positionOffset         = positionOffset;
-            activeViewpoint ._orientationOffset      = orientationOffset;
-            activeViewpoint ._centerOfRotationOffset = centerOfRotationOffset;
-            activeViewpoint ._fieldOfViewScale       = fieldOfViewScale;
-            activeViewpoint .nearDistance            = nearDistance,
-            activeViewpoint .farDistance             = farDistance;
-         }
-
-         break;
       }
    }
-});
+
+   async loadURL (src)
+   {
+      const
+         browser         = this .#browser,
+         worldURL        = browser .getWorldURL (),
+         activeViewpoint = browser .getActiveViewpoint ();
+
+      if (activeViewpoint)
+      {
+         var
+            positionOffset         = activeViewpoint ._positionOffset .copy (),
+            orientationOffset      = activeViewpoint ._orientationOffset .copy (),
+            centerOfRotationOffset = activeViewpoint ._centerOfRotationOffset .copy (),
+            fieldOfViewScale       = activeViewpoint ._fieldOfViewScale .getValue (),
+            nearDistance           = activeViewpoint .nearDistance,
+            farDistance            = activeViewpoint .farDistance;
+      }
+
+      await browser .loadURL (new X3D .MFString (src));
+
+      if (browser .getWorldURL () === worldURL && activeViewpoint && browser .getActiveViewpoint ())
+      {
+         const activeViewpoint = browser .getActiveViewpoint ();
+
+         activeViewpoint ._positionOffset         = positionOffset;
+         activeViewpoint ._orientationOffset      = orientationOffset;
+         activeViewpoint ._centerOfRotationOffset = centerOfRotationOffset;
+         activeViewpoint ._fieldOfViewScale       = fieldOfViewScale;
+         activeViewpoint .nearDistance            = nearDistance,
+         activeViewpoint .farDistance             = farDistance;
+      }
+   }
+}
+
+const preview = new Preview ();
 
 (() =>
 {
