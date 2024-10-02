@@ -96,7 +96,7 @@ class X3DPreview
          {
             log .apply (this, args);
 
-            vscode .postMessage ({ command, args: args .map (arg => String (arg)) });
+            vscode .postMessage ({ command, args: args .map (String) });
          }
       }
 
