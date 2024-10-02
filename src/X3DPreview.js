@@ -81,6 +81,7 @@ class X3DPreview
 <html>
 <head>
    <meta charset="utf-8">
+   <script defer src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
    <script type="module">
 import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
 
@@ -89,6 +90,20 @@ const browser = X3D .getBrowser ();
 browser .getContextMenu () .setUserMenu (() =>
 {
    return {
+      "browserUpdate": {
+         "name": "Browser Update",
+         "type": "checkbox",
+         "selected": browser .isLive (),
+         "events": {
+            click: (event) =>
+            {
+               if ($(event .target) .is (":checked"))
+                  browser .beginUpdate ();
+               else
+                  browser .endUpdate ();
+            },
+         },
+      },
       "viewAll": {
          "name": "View All",
          "callback": () => browser .viewAll (),
