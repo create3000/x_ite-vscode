@@ -20,7 +20,9 @@
     "PLY",
     "SVG",
     "3D",
-    "model"
+    "model",
+    "viewer",
+    "tools"
   ],
   "galleryBanner": {
     "color": "#383838",
