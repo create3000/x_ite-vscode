@@ -6,7 +6,8 @@
   "version": "1.0.7",
   "icon": "resources/icon.png",
   "repository": {
-    "url": "https://github.com/create3000/x_ite-vscode"
+    "type": "git",
+    "url": "git+https://github.com/create3000/x_ite-vscode.git"
   },
   "keywords": [
     "X3D",
