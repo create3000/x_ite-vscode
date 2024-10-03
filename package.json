@@ -26,6 +26,22 @@
     "color": "#383838",
     "theme": "dark"
   },
+  "main": "./src/extension.js",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test",
+    "package": "node build/package.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.8",
+    "@types/node": "22.7.4",
+    "@types/vscode": "^1.93.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "eslint": "^9.11.1",
+    "shell-tools": "^1.1.9"
+  },
   "engines": {
     "vscode": "^1.93.0"
   },
@@ -39,21 +55,6 @@
     "onLanguage:wavefront-obj",
     "onLanguage:plaintext"
   ],
-  "main": "./src/extension.js",
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "vscode-test",
-    "package": "vsce package"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.93.0",
-    "@types/mocha": "^10.0.8",
-    "@types/node": "22.7.4",
-    "eslint": "^9.11.1",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
-  },
   "contributes": {
     "commands": [
       {
