@@ -7,10 +7,12 @@ class X3DPanel
 {
    #context;
    #panels = new Map ();
+   #outputChannel = vscode .window .createOutputChannel ("x_ite", { log: true });
 
    constructor (context)
    {
       this .#context = context;
+      this .#outputChannel .show (true);
    }
 
    openPreview (textEditor)
@@ -126,6 +128,14 @@ html, body, x3d-canvas {
       panel .watchers .length = 0;
    }
 
+   #logLevel = new Map ([
+      ["log", vscode .LogLevel .Info],
+      ["info", vscode .LogLevel .Info],
+      ["warn", vscode .LogLevel .Warning],
+      ["error", vscode .LogLevel .Error],
+      ["debug", vscode .LogLevel .Info],
+   ]);
+
    didReceiveMessage (message)
    {
       switch (message .command)
@@ -137,6 +147,9 @@ html, body, x3d-canvas {
          case "debug":
          {
             console [message .command] (... message .args);
+            // https://github.com/microsoft/vscode/issues/223536
+            // this .#outputChannel .setLogLevel (this .#logLevel .get (message .command));
+            this .#outputChannel .appendLine (message .args .join (" "));
             return;
          }
       }
