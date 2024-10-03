@@ -10,7 +10,11 @@ Command name: `X3D: Preview 3D Model`, default key binding: <kbd>ALT</kbd> + <kb
 
 The above model and other sample models can be obtained from the [X_ITE media](https://github.com/create3000/media/tree/main/docs/examples) repository.
 
-With this extension you can preview X3D files in X_ITE. A new VS Code column is opened with the file preview. Console messages from the preview are redirected to the Output panel of VS Code when you switch to the 'X_ITE' channel.
+With this extension you can preview X3D files in X_ITE. A new VS Code column is opened with the file preview.#
+
+## Console Output
+
+Console messages from the preview are redirected to the Output panel of VS Code when you switch to the 'X_ITE' channel.
 
 ## License
 
