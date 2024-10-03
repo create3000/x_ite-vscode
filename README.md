@@ -16,6 +16,8 @@ With this extension you can preview X3D files in X_ITE. A new VS Code column is 
 
 Console messages from the preview are redirected to the Output panel of VS Code when you switch to the 'X_ITE' channel.
 
+![Output](images/output.png)
+
 ## License
 
 GPLv3, see [LICENSE.md](LICENSE.md).
