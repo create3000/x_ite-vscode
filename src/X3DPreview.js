@@ -13,6 +13,13 @@ class X3DPreview
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
       window .addEventListener ("message", event => this .receiveMessage (event));
+
+      console .log   ("log");
+      console .info  ("info");
+      console .warn  ("warn");
+      console .error ("error");
+      console .debug ("debug");
+
    }
 
    createUserMenu ()
