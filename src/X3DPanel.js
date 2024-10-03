@@ -7,7 +7,7 @@ class X3DPanel
 {
    #context;
    #panels = new Map ();
-   #outputChannel = vscode .window .createOutputChannel ("x_ite");
+   #outputChannel = vscode .window .createOutputChannel ("X_ITE", { log: true });
 
    constructor (context)
    {
@@ -147,6 +147,8 @@ html, body, x3d-canvas {
          case "debug":
          {
             console [message .command] (... message .args);
+            // https://github.com/microsoft/vscode/issues/223536
+            // this .#outputChannel .setLogLevel (this .#logLevel .get (message .command));
             this .#outputChannel .appendLine (message .args .join (" "));
             return;
          }
