@@ -8,7 +8,7 @@ This extension integrates the [X_ITE X3D Browser](https://create3000.github.io/x
 
 Command name: `X3D: Preview 3D Model`, default key binding: <kbd>ALT</kbd> + <kbd>X</kbd>
 
-The above model and other sample models can be obtained from the [X_ITE media](https://github.com/create3000/media/tree/main/docs/examples) repository.
+The above model and other sample models can be obtained from the X_ITE [media](https://github.com/create3000/media/tree/main/docs/examples) repository.
 
 With this extension you can preview X3D files in X_ITE. A new VS Code column is opened with the file preview.
 
