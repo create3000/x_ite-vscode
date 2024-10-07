@@ -2,12 +2,10 @@ import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
 
 class X3DPreview
 {
-   #browser;
+   #browser = X3D .getBrowser ();
 
    constructor ()
    {
-      this .#browser = X3D .getBrowser ();
-
       this .redirectConsoleMessages ();
 
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
