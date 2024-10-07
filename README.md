@@ -10,7 +10,21 @@ Command name: `X3D: Preview 3D Model`, default key binding: <kbd>ALT</kbd> + <kb
 
 The above model and other sample models can be obtained from the X_ITE [media](https://github.com/create3000/media/tree/main/docs/examples) repository.
 
-With this extension you can preview X3D files in X_ITE. A new VS Code column is opened with the file preview.
+With this extension you can preview 3D files in X_ITE. A new VS Code column is opened with the file preview.
+
+## Supported File Formats
+
+| Encoding         | File Extension | MIME Type       |
+|------------------|----------------|-----------------|
+| X3D XML          | .x3d, .x3dz    | model/x3d+xml   |
+| X3D JSON         | .x3dj, .x3djz  | model/x3d+json  |
+| X3D Classic VRML | .x3dv, .x3dvz  | model/x3d+vrml  |
+| VRML             | .wrl, .wrz     | model/vrml      |
+| glTF             | .gltf, .glb    | model/gltf+json |
+| Wavefront OBJ    | .obj           | model/obj       |
+| STL              | .stl           | model/stl       |
+| PLY              | .ply           | model/ply       |
+| SVG Document     | .svg, .svgz    | image/svg+xml   |
 
 ## Console Output
 
