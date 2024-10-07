@@ -49,7 +49,7 @@ class X3DPreview
       {
          case "load-url":
          {
-            this .loadURL (data .src)
+            this .loadURL (data .src);
             break;
          }
       }
