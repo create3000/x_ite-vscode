@@ -1,5 +1,7 @@
 import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
 
+const vscode = acquireVsCodeApi ();
+
 class X3DPreview
 {
    #browser = X3D .getBrowser ();
@@ -11,6 +13,8 @@ class X3DPreview
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
       window .addEventListener ("message", event => this .receiveMessage (event));
+
+      window .open = url => this .openLinkInExternalBrowser (url);
    }
 
    createUserMenu ()
@@ -84,10 +88,13 @@ class X3DPreview
       }
    }
 
+   openLinkInExternalBrowser (url)
+   {
+      vscode .postMessage ({ command: "open-link", args: [url] });
+   }
+
    redirectConsoleMessages ()
    {
-      const vscode = acquireVsCodeApi ();
-
       function output (log, command)
       {
          return function (... args)

@@ -143,6 +143,13 @@ html, body, x3d-canvas {
             this .#outputChannel [message .command] (message .args .join (" "));
             break;
          }
+         case "open-link":
+         {
+            const uri = vscode .Uri .parse (... message .args);
+
+            vscode .commands .executeCommand ("vscode.open", uri);
+            break;
+         }
       }
    }
 }
