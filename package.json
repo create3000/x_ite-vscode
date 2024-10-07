@@ -53,9 +53,12 @@
   ],
   "activationEvents": [
     "onLanguage:X3D",
+    "onLanguage:VRML",
     "onLanguage:xml",
     "onLanguage:json",
     "onLanguage:wavefront-obj",
+    "onLanguage:stlascii",
+    "onLanguage:ply",
     "onLanguage:plaintext"
   ],
   "contributes": {
