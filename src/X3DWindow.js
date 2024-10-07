@@ -44,7 +44,7 @@ class X3DWindow
          }
          case "xml":
          {
-            const text = textEditor .document .getText () ;
+            const text = textEditor .document .getText () .substring (0, 1024);
 
             if (text .includes ("<X3D"))
                return true;
@@ -56,7 +56,7 @@ class X3DWindow
          }
          case "json":
          {
-            const text = textEditor .document .getText () ;
+            const text = textEditor .document .getText () .substring (0, 1024);
 
             if (text .match (/^\s*{\s*"X3D"\s*:/s))
                return true;
