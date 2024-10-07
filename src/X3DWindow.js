@@ -65,7 +65,7 @@ class X3DWindow
                ".x3dj",
                ".gltf",
             ]
-            .includes (path .extname (textEditor .document .fileName));
+            .includes (path .extname (textEditor .document .fileName .toLowerCase ()));
          }
          case "plaintext":
          {
@@ -80,7 +80,7 @@ class X3DWindow
                ".ply",
                ".svg",
             ]
-            .includes (path .extname (textEditor .document .fileName));
+            .includes (path .extname (textEditor .document .fileName .toLowerCase ()));
          }
          default:
          {
