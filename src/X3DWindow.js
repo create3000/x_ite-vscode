@@ -30,7 +30,7 @@ class X3DWindow
    {
       const textEditor = vscode .window .activeTextEditor;
 
-      console .log (textEditor ?.document ?.languageId)
+      // console .log (textEditor ?.document ?.languageId)
 
       switch (textEditor ?.document ?.languageId ?.toLowerCase ())
       {
@@ -38,6 +38,7 @@ class X3DWindow
          case "vrml":
          case "wavefront-obj":
          case "stlascii":
+         case "ply":
          {
             return true;
          }
