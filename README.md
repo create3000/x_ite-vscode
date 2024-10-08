@@ -6,7 +6,7 @@ This extension integrates the [X_ITE X3D Browser](https://create3000.github.io/x
 
 ![X3D Logo Pieces](images/logo-pieces.png)
 
-Command name: `X3D: Preview 3D Model`, default key binding: <kbd>ALT</kbd> + <kbd>X</kbd>
+Command name: `X3D: Preview 3D Model`, default key binding Windows: <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>X</kbd>, default key binding macOS: <kbd>CMD</kbd> + <kbd>OPTION</kbd> + <kbd>X</kbd>
 
 The above model and other sample models can be obtained from the X_ITE [media](https://github.com/create3000/media/tree/main/docs/examples) repository.
 

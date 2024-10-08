@@ -75,8 +75,8 @@
     "keybindings": [
       {
         "command": "x_ite-vscode.preview-model",
-        "key": "alt+x",
-        "mac": "alt+x",
+        "key": "ctrl+alt+x",
+        "mac": "cmd+alt+x",
         "when": "editorTextFocus && x_iteFileActive"
       }
     ],

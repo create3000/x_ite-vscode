@@ -4,6 +4,10 @@ All notable changes to the "x-ite-vscode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.4]
+
+* Changed key binding.
+
 ## [1.1.0]
 
 * Open links in external browser.
