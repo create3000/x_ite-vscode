@@ -78,6 +78,7 @@ class X3DWindow
                ".vrml",
                ".gltf",
                ".obj",
+               ".stl",
                ".ply",
                ".svg",
             ]
