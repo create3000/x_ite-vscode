@@ -92,6 +92,7 @@ class X3DPanel
    <script type="module" src="${script}"></script>
    <style>
 html, body, x3d-canvas {
+   overflow: hidden;
    margin: 0;
    padding: 0;
    width: 100vw;
