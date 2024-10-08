@@ -44,7 +44,10 @@ function main ()
 		result  = systemSync (`zenity --question '--text=Do you really want to publish X_ITE VS Code Extension v${version} now?' --ok-label=Yes --cancel-label=No`);
 
 	if (result !== 0)
+   {
+      systemSync ("git checkout -- package.json");
 		process .exit (1);
+   }
 
 	console .log (`Publishing X_ITE VS Code Extension v${version} now.`);
 
