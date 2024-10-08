@@ -34,7 +34,7 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "vscode-test",
-    "package": "node build/package.js"
+    "release": "node build/release.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.8",
