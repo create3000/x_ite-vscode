@@ -37,7 +37,16 @@ function main ()
 {
    bump ();
 
-   const version = sh (`npm pkg get version | sed 's/"//g'`) .trim ();
+	console .log ("Waiting for confirmation ...");
+
+	const
+		version = sh (`npm pkg get version | sed 's/"//g'`) .trim (),
+		result  = systemSync (`zenity --question '--text=Do you really want to publish X_ITE VS Code Extension v${version} now?' --ok-label=Yes --cancel-label=No`);
+
+	if (result !== 0)
+		process .exit (1);
+
+	console .log (`Publishing X_ITE VS Code Extension v${version} now.`);
 
    commit (version);
    tags (version);
