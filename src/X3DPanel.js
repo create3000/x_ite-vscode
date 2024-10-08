@@ -103,6 +103,7 @@ html, body, x3d-canvas {
 <body>
    <x3d-canvas
          debug="true"
+         cache="false"
          splashScreen="false"
          contentScale="auto">
    </x3d-canvas>
