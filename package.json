@@ -7,7 +7,7 @@
   "icon": "resources/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/create3000/x_ite-vscode"
+    "url": "https://github.com/create3000/x_ite-vscode.git"
   },
   "keywords": [
     "X3D",
@@ -28,6 +28,9 @@
   "galleryBanner": {
     "color": "#383838",
     "theme": "dark"
+  },
+  "sponsor": {
+    "url": "https://www.patreon.com/X_ITE"
   },
   "main": "./src/extension.js",
   "scripts": {
