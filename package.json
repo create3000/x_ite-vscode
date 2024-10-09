@@ -26,6 +26,11 @@
     "viewer",
     "tools"
   ],
+  "author": {
+    "name": "Holger Seelig",
+    "email": "holger.seelig@gmail.com",
+    "url": "https://github.com/create3000"
+  },
   "galleryBanner": {
     "color": "#383838",
     "theme": "dark"
