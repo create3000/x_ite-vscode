@@ -6,6 +6,11 @@
   "version": "1.1.4",
   "icon": "resources/icon.png",
   "homepage": "https://create3000.github.io/x_ite/",
+  "author": {
+    "name": "Holger Seelig",
+    "email": "holger.seelig@gmail.com",
+    "url": "https://github.com/create3000"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/create3000/x_ite-vscode.git"
@@ -26,11 +31,6 @@
     "viewer",
     "tools"
   ],
-  "author": {
-    "name": "Holger Seelig",
-    "email": "holger.seelig@gmail.com",
-    "url": "https://github.com/create3000"
-  },
   "galleryBanner": {
     "color": "#383838",
     "theme": "dark"
