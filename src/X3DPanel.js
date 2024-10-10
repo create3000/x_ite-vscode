@@ -82,7 +82,9 @@ class X3DPanel
 
    getWebviewContent (panel)
    {
-      const script = panel .webview .asWebviewUri (vscode .Uri .file (path .resolve (__dirname, "preview.js")));
+      const
+         script = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.js"))),
+         css    = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.css")));
 
       return /* html */ `<!DOCTYPE html>
 <html>
@@ -90,24 +92,7 @@ class X3DPanel
    <meta charset="utf-8">
    <script defer src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
    <script type="module" src="${script}"></script>
-   <style>
-html, body, x3d-canvas {
-   overflow: hidden;
-   margin: 0;
-   padding: 0;
-   width: 100vw;
-   height: 100vh;
-}
-
-.toolbar {
-   position: absolute;
-   top: 10px;
-   left: 0px;
-   width: 100px;
-   height: 20px;
-   background: red;
-}
-   </style>
+   <link rel="stylesheet" href="${css}">
 </head>
 <body>
    <x3d-canvas

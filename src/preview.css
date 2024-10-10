@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+html, body, x3d-canvas {
+   overflow: hidden;
+   margin: 0;
+   padding: 0;
+   width: 100vw;
+   height: 100vh;
+}
+
+.toolbar {
+   position: absolute;
+   top: 10px;
+   left: 0px;
+   width: 100px;
+   height: 20px;
+   background: red;
+}
