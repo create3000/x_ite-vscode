@@ -49,9 +49,35 @@ class X3DPreview
 
    createToolbar ()
    {
-      this .#toolbar = $("<div></div>")
+      this .#toolbar ??= $("<div></div>")
          .addClass ("toolbar")
          .appendTo ($("body"));
+
+      const
+         browser = this .#browser,
+         toolbar = this .#toolbar;
+
+      toolbar .empty ();
+
+      const playButton = $("<button></button>")
+         .attr ("title", "Toggle browser update on/off.")
+         .addClass (["fa-solid", "fa-play"])
+         .addClass (browser .isLive () ? "selected" : "")
+         .on ("click", () =>
+         {
+            if (browser .isLive ())
+               browser .endUpdate ();
+            else
+               browser .beginUpdate ();
+         })
+         .appendTo (toolbar);
+
+      browser .getLive () .addFieldCallback ("preview", () =>
+      {
+         playButton
+            .removeClass ("selected")
+            .addClass (browser .isLive () ? "selected" : "");
+      });
    }
 
    receiveMessage ({ data })

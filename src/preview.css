@@ -13,6 +13,6 @@ html, body, x3d-canvas {
    top: 10px;
    left: 0px;
    width: 100px;
-   height: 20px;
-   background: red;
+   height: 25px;
+   background: var(--vscode-editor-background);
 }
