@@ -12,6 +12,8 @@ class X3DPreview
 
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
+      this .createToolbar ();
+
       window .addEventListener ("message", event => this .receiveMessage (event));
 
       window .open = url => this .openLinkInExternalBrowser (url);
@@ -41,6 +43,15 @@ class X3DPreview
             callback: () => browser .viewAll (),
          },
       };
+   }
+
+   #toolbar;
+
+   createToolbar ()
+   {
+      this .#toolbar = $("<div></div>")
+         .addClass ("toolbar")
+         .appendTo ($("body"));
    }
 
    receiveMessage ({ data })

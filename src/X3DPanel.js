@@ -98,6 +98,15 @@ html, body, x3d-canvas {
    width: 100vw;
    height: 100vh;
 }
+
+.toolbar {
+   position: absolute;
+   top: 10px;
+   left: 0px;
+   width: 100px;
+   height: 20px;
+   background: red;
+}
    </style>
 </head>
 <body>
