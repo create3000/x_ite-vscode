@@ -101,7 +101,7 @@ class X3DPreview
 
    openLinkInExternalBrowser (url)
    {
-      vscode .postMessage ({ command: "open-link", args: [url] });
+      vscode .postMessage ({ command: "open-link", url });
    }
 
    redirectConsoleMessages ()

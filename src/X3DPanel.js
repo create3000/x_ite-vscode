@@ -156,7 +156,7 @@ html, body, x3d-canvas {
          }
          case "open-link":
          {
-            const uri = vscode .Uri .parse (... message .args);
+            const uri = vscode .Uri .parse (message .url);
 
             vscode .commands .executeCommand ("vscode.open", uri);
             break;
