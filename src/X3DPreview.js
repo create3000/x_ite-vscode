@@ -69,7 +69,7 @@ class X3DPreview
          .appendTo (toolbar);
 
       const grip = $("<button></button>")
-         .attr ("title", "Reveal Toolbar.")
+         .attr ("title", "Reveal/Hide Toolbar.")
          .addClass (["fa-solid", "fa-grip-lines-vertical", "grip"])
          .on ("click", () =>
          {
