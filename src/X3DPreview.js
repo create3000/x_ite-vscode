@@ -74,15 +74,21 @@ class X3DPreview
          .on ("click", () =>
          {
             if (localStorage .toolbarRevealed)
-               toolbar .animate ({ left: -(toolbar .width () - grip .width () - 4) });
+               toolbar .animate ({ left: -(toolbar .width () - grip .width ()) });
             else
-               toolbar .animate ({ left: 0 });
+               toolbar .animate ({ left: -4 });
 
             localStorage .toolbarRevealed = !localStorage .toolbarRevealed;
          })
          .appendTo (toolbar);
 
-      const updateToolbarPosition = () => toolbar .css ("left", localStorage .toolbarRevealed ? 0 : -(toolbar .width () - grip .width () - 4));
+      const updateToolbarPosition = () =>
+      {
+         if (localStorage .toolbarRevealed)
+            toolbar .css ({ left: -4 });
+         else
+            toolbar .css ({ left: -(toolbar .width () - grip .width ()) });
+      };
 
       toolbar .observer ??= new ResizeObserver (updateToolbarPosition);
       toolbar .observer .disconnect ();
