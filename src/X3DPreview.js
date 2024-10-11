@@ -5,47 +5,20 @@ const vscode = acquireVsCodeApi ();
 class X3DPreview
 {
    #browser = X3D .getBrowser ();
+   #toolbar;
 
    constructor ()
    {
       this .redirectConsoleMessages ();
 
-      this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
-
       this .createToolbar ();
+
+      this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
       window .addEventListener ("message", event => this .receiveMessage (event));
 
       window .open = url => this .openLinkInExternalBrowser (url);
    }
-
-   createUserMenu ()
-   {
-      const browser = this .#browser;
-
-      return {
-         browserUpdate: {
-            name: "Browser Update",
-            type: "checkbox",
-            selected: browser .isLive (),
-            events: {
-               click: (event) =>
-               {
-                  if ($(event .target) .is (":checked"))
-                     browser .beginUpdate ();
-                  else
-                     browser .endUpdate ();
-               },
-            },
-         },
-         viewAll: {
-            name: "View All",
-            callback: () => browser .viewAll (),
-         },
-      };
-   }
-
-   #toolbar;
 
    createToolbar ()
    {
@@ -101,6 +74,25 @@ class X3DPreview
                toolbar .animate ({ left: -(toolbar .width () - grip .width () - 4) });
          })
          .appendTo (toolbar);
+   }
+
+   createUserMenu ()
+   {
+      const toolbar = this .#toolbar;
+
+      return {
+         toolbar: {
+            name: "Show Toolbar",
+            type: "checkbox",
+            selected: toolbar .is (":visible"),
+            events: {
+               click: () =>
+               {
+                  toolbar .fadeToggle ();
+               },
+            },
+         },
+      };
    }
 
    receiveMessage ({ data })

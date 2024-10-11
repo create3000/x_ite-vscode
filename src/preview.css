@@ -43,7 +43,7 @@ html, body, x3d-canvas {
    position: absolute;
    top: 10px;
    left: 0px;
-   padding: 4px;
+   padding: 6px;
    background: var(--vscode-editor-background);
 }
 
@@ -57,7 +57,7 @@ html, body, x3d-canvas {
    background: none;
    padding: 0 2px;
    color: var(--vscode-editor-foreground);
-   font-size: 18px;
+   font-size: 16px;
  }
 
 .toolbar button:not(:first-child) {
