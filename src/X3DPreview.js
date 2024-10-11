@@ -19,9 +19,9 @@ class X3DPreview
       this .createToolbar ();
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
-      window .addEventListener ("message", event => this .receiveMessage (event));
-
       window .open = url => this .openLinkInExternalBrowser (url);
+
+      window .addEventListener ("message", event => this .receiveMessage (event));
    }
 
    createToolbar ()
