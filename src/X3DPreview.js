@@ -60,10 +60,10 @@ class X3DPreview
             .addClass (browser .isLive () ? "selected" : "unselected");
       });
 
-      $("<span></span>") .addClass ("dot") .appendTo (toolbar);
-
       if (browser .currentScene .encoding === "GLTF")
       {
+         $("<span></span>") .addClass ("dot") .appendTo (toolbar);
+
          const light = this .getEnvironmentLight ();
 
          const button = $("<button></button>")
@@ -88,6 +88,8 @@ class X3DPreview
 
          updateEnvironmentLight ();
       }
+
+      $("<span></span>") .addClass ("dot") .appendTo (toolbar);
 
       $("<button></button>")
          .attr ("title", "View all objects in scene.")
