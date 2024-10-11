@@ -90,7 +90,7 @@ class X3DPanel
 <html>
 <head>
    <meta charset="utf-8">
-   <script defer src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+   <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
    <script type="module" src="${script}"></script>
    <link rel="stylesheet" href="${css}">
 </head>

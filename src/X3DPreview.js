@@ -62,7 +62,7 @@ class X3DPreview
       const playButton = $("<button></button>")
          .attr ("title", "Toggle browser update on/off.")
          .addClass (["fa-solid", "fa-play"])
-         .addClass (browser .isLive () ? "selected" : "")
+         .addClass (browser .isLive () ? "selected" : "unselected")
          .on ("click", () =>
          {
             if (browser .isLive ())
@@ -76,8 +76,31 @@ class X3DPreview
       {
          playButton
             .removeClass ("selected")
-            .addClass (browser .isLive () ? "selected" : "");
+            .addClass (browser .isLive () ? "selected" : "unselected");
       });
+
+      $("<span></span>") .addClass ("dot") .appendTo (toolbar);
+
+      $("<button></button>")
+         .attr ("title", "View all objects in scene.")
+         .addClass (["fa-solid", "fa-arrows-to-dot"])
+         .on ("click", () =>
+         {
+            browser .viewAll ();
+         })
+         .appendTo (toolbar);
+
+      const grip = $("<button></button>")
+         .attr ("title", "Reveal Toolbar.")
+         .addClass (["fa-solid", "fa-grip-lines-vertical", "grip"])
+         .on ("click", () =>
+         {
+            if (parseFloat (toolbar .css ("left")))
+               toolbar .animate ({ left: 0 });
+            else
+               toolbar .animate ({ left: -(toolbar .width () - grip .width () - 4) });
+         })
+         .appendTo (toolbar);
    }
 
    receiveMessage ({ data })
