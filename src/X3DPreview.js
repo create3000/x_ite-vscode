@@ -5,14 +5,18 @@ const vscode = acquireVsCodeApi ();
 class X3DPreview
 {
    #browser = X3D .getBrowser ();
+   #localStorage = this .#browser .getLocalStorage () .addNameSpace ("VSCodePreview.");
    #toolbar;
 
    constructor ()
    {
+      this .#localStorage .setDefaultValues ({
+         toolbarVisible: true,
+         toolbarRevealed: true,
+      });
+
       this .redirectConsoleMessages ();
-
       this .createToolbar ();
-
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
       window .addEventListener ("message", event => this .receiveMessage (event));
@@ -27,8 +31,9 @@ class X3DPreview
          .appendTo ($("body"));
 
       const
-         browser = this .#browser,
-         toolbar = this .#toolbar;
+         browser      = this .#browser,
+         toolbar      = this .#toolbar,
+         localStorage = this .#localStorage;
 
       toolbar .empty ();
 
@@ -68,27 +73,41 @@ class X3DPreview
          .addClass (["fa-solid", "fa-grip-lines-vertical", "grip"])
          .on ("click", () =>
          {
-            if (parseFloat (toolbar .css ("left")))
-               toolbar .animate ({ left: 0 });
-            else
+            if (localStorage .toolbarRevealed)
                toolbar .animate ({ left: -(toolbar .width () - grip .width () - 4) });
+            else
+               toolbar .animate ({ left: 0 });
+
+            localStorage .toolbarRevealed = !localStorage .toolbarRevealed;
          })
          .appendTo (toolbar);
+
+      toolbar .css ("left", localStorage .toolbarRevealed ? 0 : -(toolbar .width () - grip .width () - 4));
+
+      if (!localStorage .toolbarVisible)
+         toolbar .hide ();
    }
 
    createUserMenu ()
    {
-      const toolbar = this .#toolbar;
+      const
+         toolbar      = this .#toolbar,
+         localStorage = this .#localStorage;
 
       return {
          toolbar: {
             name: "Show Toolbar",
             type: "checkbox",
-            selected: toolbar .is (":visible"),
+            selected: localStorage .toolbarVisible,
             events: {
                click: () =>
                {
-                  toolbar .fadeToggle ();
+                  if (localStorage .toolbarVisible)
+                     toolbar .fadeOut ();
+                  else
+                     toolbar .fadeIn ();
+
+                  localStorage .toolbarVisible = !localStorage .toolbarVisible;
                },
             },
          },
