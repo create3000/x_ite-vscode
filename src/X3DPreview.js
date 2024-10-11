@@ -16,15 +16,16 @@ class X3DPreview
       });
 
       this .redirectConsoleMessages ();
-      this .createToolbar ();
+      this .updateToolbar ();
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
 
-      window .open = url => this .openLinkInExternalBrowser (url);
-
+      window .addEventListener ("storage", () => this .updateToolbar ());
       window .addEventListener ("message", event => this .receiveMessage (event));
+
+      window .open = url => this .openLinkInExternalBrowser (url);
    }
 
-   createToolbar ()
+   updateToolbar ()
    {
       this .#toolbar ??= $("<div></div>")
          .addClass ("toolbar")
@@ -90,10 +91,15 @@ class X3DPreview
             toolbar .css ({ left: -(toolbar .width () - grip .width ()) });
       };
 
-      toolbar .observer ??= new ResizeObserver (updateToolbarPosition);
-      toolbar .observer .disconnect ();
-      toolbar .observer .observe (toolbar [0], { childList: true });
       updateToolbarPosition ();
+
+      if (!toolbar .observer)
+      {
+         toolbar .observer = new ResizeObserver (updateToolbarPosition);
+
+         toolbar .observer .disconnect ();
+         toolbar .observer .observe (toolbar [0], { childList: true });
+      }
 
       if (!localStorage .toolbarVisible)
          toolbar .hide ();
@@ -129,6 +135,11 @@ class X3DPreview
    {
       switch (data .command)
       {
+         case "update":
+         {
+            this .updateToolbar ();
+            break;
+         }
          case "load-url":
          {
             this .loadURL (data .src);

@@ -64,7 +64,7 @@ class X3DPanel
          // this .updateActivePanel ();
       });
 
-      // panel .onDidChangeViewState (() => this .updateActivePanel ());
+      panel .onDidChangeViewState (() => panel .webview .postMessage ({ command: "update" }));
 
       this .#panels .set (filePath, panel);
 
