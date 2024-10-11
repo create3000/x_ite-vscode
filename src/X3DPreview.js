@@ -14,7 +14,7 @@ class X3DPreview
       this .#localStorage .setDefaultValues ({
          toolbarVisible: true,
          toolbarRevealed: true,
-         ibl: false,
+         ibl: true,
       });
 
       this .redirectConsoleMessages ();
@@ -66,19 +66,27 @@ class X3DPreview
       {
          const environmentLight = this .getEnvironmentLight ();
 
-         $("<button></button>")
+         const button = $("<button></button>")
             .attr ("title", "Toggle image base lighting.")
             .addClass (["fa-regular", "fa-lightbulb"])
-            .addClass (localStorage .ibl ? "selected" : "unselected")
             .on ("click", () =>
             {
                localStorage .ibl = !localStorage .ibl;
 
-               environmentLight .then (light => light .on = localStorage .ibl);
+               updateEnvironmentLight ();
             })
             .appendTo (toolbar);
 
-         environmentLight .then (light => light .on = localStorage .ibl);
+         const updateEnvironmentLight = () =>
+         {
+            button
+               .removeClass (["selected", "unselected"])
+               .addClass (localStorage .ibl ? "selected" : "unselected");
+
+            environmentLight .then (light => light .on = localStorage .ibl);
+         };
+
+         updateEnvironmentLight ();
       }
 
       $("<button></button>")
