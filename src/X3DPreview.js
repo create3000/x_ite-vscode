@@ -7,12 +7,14 @@ class X3DPreview
    #browser = X3D .getBrowser ();
    #localStorage = this .#browser .getLocalStorage () .addNameSpace ("VSCodePreview.");
    #toolbar;
+   #environmentLight;
 
    constructor ()
    {
       this .#localStorage .setDefaultValues ({
          toolbarVisible: true,
          toolbarRevealed: true,
+         ibl: false,
       });
 
       this .redirectConsoleMessages ();
@@ -59,6 +61,25 @@ class X3DPreview
       });
 
       $("<span></span>") .addClass ("dot") .appendTo (toolbar);
+
+      if (browser .currentScene .encoding === "GLTF")
+      {
+         const environmentLight = this .getEnvironmentLight ();
+
+         $("<button></button>")
+            .attr ("title", "Toggle image base lighting.")
+            .addClass (["fa-regular", "fa-lightbulb"])
+            .addClass (localStorage .ibl ? "selected" : "unselected")
+            .on ("click", () =>
+            {
+               localStorage .ibl = !localStorage .ibl;
+
+               environmentLight .then (light => light .on = localStorage .ibl);
+            })
+            .appendTo (toolbar);
+
+         environmentLight .then (light => light .on = localStorage .ibl);
+      }
 
       $("<button></button>")
          .attr ("title", "View all objects in scene.")
@@ -130,6 +151,52 @@ class X3DPreview
       };
    }
 
+   async getEnvironmentLight ()
+   {
+      if (!this .#environmentLight)
+      {
+         const
+            browser = this .#browser,
+            scene   = browser .currentScene;
+
+         scene .addComponent (browser .getComponent ("CubeMapTexturing"));
+
+         await browser .loadComponents (scene);
+
+         const
+            environmentLight  = scene .createNode ("EnvironmentLight"),
+            diffuseTexture    = scene .createNode ("ImageCubeMapTexture"),
+            specularTexture   = scene .createNode ("ImageCubeMapTexture"),
+            textureProperties = scene .createNode ("TextureProperties");
+
+         textureProperties .generateMipMaps     = true;
+         textureProperties .minificationFilter  = "NICEST";
+         textureProperties .magnificationFilter = "NICEST";
+
+         diffuseTexture  .textureProperties = textureProperties;
+         specularTexture .textureProperties = textureProperties;
+
+         environmentLight .intensity       = 1;
+         environmentLight .color           = new X3D .SFColor (1, 1, 1);
+         environmentLight .diffuseTexture  = diffuseTexture;
+         environmentLight .specularTexture = specularTexture;
+
+         const
+            url         = new URL (`images/helipad`, import .meta .url),
+            diffuseURL  = new X3D .MFString (`${url}-diffuse.avif`),
+            specularURL = new X3D .MFString (`${url}-specular.avif`);
+
+         diffuseTexture  .url = diffuseURL;
+         specularTexture .url = specularURL;
+
+         scene .addRootNode (environmentLight);
+
+         this.#environmentLight = environmentLight;
+      }
+
+      return this .#environmentLight;
+   }
+
    receiveMessage ({ data })
    {
       switch (data .command)
@@ -178,6 +245,8 @@ class X3DPreview
          activeViewpoint .nearDistance            = nearDistance,
          activeViewpoint .farDistance             = farDistance;
       }
+
+      this .updateToolbar ();
    }
 
    openLinkInExternalBrowser (url)
