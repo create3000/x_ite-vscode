@@ -101,7 +101,9 @@ class X3DPreview
          toolbar .observer .observe (toolbar [0], { childList: true });
       }
 
-      if (!localStorage .toolbarVisible)
+      if (localStorage .toolbarVisible)
+         toolbar .show ();
+      else
          toolbar .hide ();
    }
 
