@@ -82,7 +82,12 @@ class X3DPreview
          })
          .appendTo (toolbar);
 
-      toolbar .css ("left", localStorage .toolbarRevealed ? 0 : -(toolbar .width () - grip .width () - 4));
+      const updateToolbarPosition = () => toolbar .css ("left", localStorage .toolbarRevealed ? 0 : -(toolbar .width () - grip .width () - 4));
+
+      toolbar .observer ??= new ResizeObserver (updateToolbarPosition);
+      toolbar .observer .disconnect ();
+      toolbar .observer .observe (toolbar [0], { childList: true });
+      updateToolbarPosition ();
 
       if (!localStorage .toolbarVisible)
          toolbar .hide ();
