@@ -64,7 +64,7 @@ class X3DPreview
 
       if (browser .currentScene .encoding === "GLTF")
       {
-         const environmentLight = this .getEnvironmentLight ();
+         const light = this .getEnvironmentLight ();
 
          const button = $("<button></button>")
             .attr ("title", "Toggle image base lighting.")
@@ -83,7 +83,7 @@ class X3DPreview
                .removeClass (["selected", "unselected"])
                .addClass (localStorage .ibl ? "selected" : "unselected");
 
-            environmentLight .then (light => light .on = localStorage .ibl);
+            light .then (light => light .on = localStorage .ibl);
          };
 
          updateEnvironmentLight ();
