@@ -74,21 +74,18 @@ class X3DPreview
          .addClass (["fa-solid", "fa-grip-lines-vertical", "grip"])
          .on ("click", () =>
          {
-            if (localStorage .toolbarRevealed)
-               toolbar .animate ({ left: -(toolbar .width () - grip .width ()) });
-            else
-               toolbar .animate ({ left: -4 });
-
             localStorage .toolbarRevealed = !localStorage .toolbarRevealed;
+
+            updateToolbarPosition ("animate");
          })
          .appendTo (toolbar);
 
-      const updateToolbarPosition = () =>
+      const updateToolbarPosition = (action = "css") =>
       {
          if (localStorage .toolbarRevealed)
-            toolbar .css ({ left: -4 });
+            toolbar [action] ({ left: -4 });
          else
-            toolbar .css ({ left: -(toolbar .width () - grip .width ()) });
+            toolbar [action] ({ left: -(toolbar .width () - grip .width ()) });
       };
 
       updateToolbarPosition ();
