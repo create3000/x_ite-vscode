@@ -116,8 +116,7 @@ class X3DPanel
       this .unwatchFiles (panel);
 
       const
-         document = panel .textEditor .document,
-         filePath = document .fileName,
+         filePath = panel .textEditor .document .fileName,
          watcher  = fs .watch (filePath, () => this .updatePanel (panel, filePath));
 
       panel .watchers .push (watcher);
