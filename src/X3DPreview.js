@@ -135,7 +135,7 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Start/Stop animations.")
-            .addClass ("menu")
+            .addClass (["animations", "menu"])
             .appendTo (toolbar);
 
          const toggleTimeSensor = (timeSensor, isActive = timeSensor .isActive) =>
