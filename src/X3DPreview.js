@@ -245,12 +245,9 @@ class X3DPreview
 
       updateToolbarPosition ();
 
-      if (!toolbar .observer)
-      {
-         toolbar .observer = new ResizeObserver (() => updateToolbarPosition ());
-
-         toolbar .observer .observe (toolbar [0]);
-      }
+      toolbar .observer ?.disconnect ();
+      toolbar .observer = new ResizeObserver (() => updateToolbarPosition ());
+      toolbar .observer .observe (toolbar [0]);
 
       if (localStorage .toolbarVisible)
          toolbar .show ();
