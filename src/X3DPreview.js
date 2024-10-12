@@ -135,11 +135,31 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Start/Stop animations.")
-            .addClass (["fa-solid", "fa-play", "animations"])
+            .addClass ("animations")
+            .appendTo (toolbar);
+
+         $("<span></span>")
+            .addClass (["fa-solid", "fa-play"])
             .on ("click", () =>
             {
+               const isActive = animations .every (animation => animation .children [0] .isActive);
+
+               for (const animation of animations)
+               {
+                  const timeSensor = animation .children [0];
+
+                  if (isActive)
+                  {
+                     timeSensor .stopTime = Date .now () / 1000;
+                  }
+                  else
+                  {
+                     timeSensor .loop      = true;
+                     timeSensor .startTime = Date .now () / 1000;
+                  }
+               }
             })
-            .appendTo (toolbar);
+            .appendTo (button);
 
          const list = $("<ul></ul>")
             .addClass ("panel")
