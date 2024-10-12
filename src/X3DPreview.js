@@ -67,7 +67,7 @@ class X3DPreview
          const light = this .getEnvironmentLight ();
 
          const button = $("<button></button>")
-            .attr ("title", "Toggle image base lighting.")
+            .attr ("title", "Toggle image base lighting on/off.")
             .addClass (["fa-regular", "fa-lightbulb"])
             .on ("click", () =>
             {
