@@ -99,8 +99,6 @@ html, body, x3d-canvas {
    display: none;
    list-style: none;
    text-align: left;
-   font-family: sans-serif;
-   font-size: 11px;
 }
 
 .toolbar .animations:hover ul {
@@ -110,4 +108,9 @@ html, body, x3d-canvas {
 .toolbar .animations ul li {
    width: 200px;
    padding: 2px;
+}
+
+.toolbar .animations ul button {
+   font-family: var(--vscode-font-family);
+   font-size: 12px;
 }
