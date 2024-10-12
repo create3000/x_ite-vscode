@@ -55,7 +55,7 @@ class X3DPanel
       panel .watchers      = [ ];
       panel .webview .html = this .getWebviewContent (panel);
 
-      panel .webview .onDidReceiveMessage (message => this .didReceiveMessage (message), undefined, this .#context .subscriptions);
+      panel .webview .onDidReceiveMessage (message => this .didReceiveMessage (panel, message), undefined, this .#context .subscriptions);
 
       panel .onDidDispose (() =>
       {
@@ -71,13 +71,18 @@ class X3DPanel
       return panel;
    }
 
-   updatePanel (panel, filePath)
+   updatePanel (panel)
    {
-      const src = panel .webview .asWebviewUri (vscode .Uri .file (filePath));
+      this .watchFiles (panel);
+
+      if (!panel .loaded)
+         return;
+
+      const
+         filePath = panel .textEditor .document .fileName,
+         src      = panel .webview .asWebviewUri (vscode .Uri .file (filePath));
 
       panel .webview .postMessage ({ command: "load-url", src: src .toString () });
-
-      this .watchFiles (panel);
    }
 
    getWebviewContent (panel)
@@ -125,10 +130,27 @@ class X3DPanel
       panel .watchers .length = 0;
    }
 
-   didReceiveMessage (message)
+   didReceiveMessage (panel, message)
    {
       switch (message .command)
       {
+         case "loaded":
+         {
+            const
+               filePath = panel .textEditor .document .fileName,
+               src      = panel .webview .asWebviewUri (vscode .Uri .file (filePath));
+
+            panel .webview .postMessage ({ command: "load-url", src: src .toString () });
+            panel .loaded = true;
+            break;
+         }
+         case "open-link":
+         {
+            const uri = vscode .Uri .parse (message .url);
+
+            vscode .commands .executeCommand ("vscode.open", uri);
+            break;
+         }
          case "log":
          case "info":
          case "warn":
@@ -137,13 +159,6 @@ class X3DPanel
          {
             console [message .command] (... message .args);
             this .#outputChannel [message .command] (message .args .join (" "));
-            break;
-         }
-         case "open-link":
-         {
-            const uri = vscode .Uri .parse (message .url);
-
-            vscode .commands .executeCommand ("vscode.open", uri);
             break;
          }
       }

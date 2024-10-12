@@ -37,14 +37,16 @@ class X3DPreview
          environmentIntensity: 1,
       });
 
-      this .redirectConsoleMessages ();
-      this .updateToolbar ();
-      this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
-
       window .addEventListener ("storage", () => this .updateToolbar ());
       window .addEventListener ("message", event => this .receiveMessage (event));
 
       window .open = url => this .openLinkInExternalBrowser (url);
+
+      this .redirectConsoleMessages ();
+      this .updateToolbar ();
+      this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
+
+      vscode .postMessage ({ command: "loaded" });
    }
 
    updateToolbar ()
