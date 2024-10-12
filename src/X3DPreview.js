@@ -256,7 +256,7 @@ class X3DPreview
             const li = $("<li></li>") .appendTo (list);
 
             const icon = $("<i></i>")
-               .addClass (["fa-solid", "fa-check"])
+               .addClass (["fa-solid", "fa-circle"])
                .css ("margin-right", 5);
 
             const button = $("<button></button>")
@@ -275,8 +275,12 @@ class X3DPreview
 
          const selectVariant = () =>
          {
+            const button = buttons [materialVariants .whichChoice];
+
+            list .find ("button") .find (">:first-child") .removeClass ("fa-circle-dot") .addClass ("fa-circle");
             list .find ("button") .removeClass ("selected") .addClass ("unselected");
-            buttons [materialVariants .whichChoice] .removeClass ("unselected") .addClass ("selected");
+            button .find (">:first-child") .removeClass ("fa-circle") .addClass ("fa-circle-dot");
+            button .removeClass ("unselected") .addClass ("selected");
          };
 
          materialVariants .getField ("whichChoice") .addFieldCallback (this, selectVariant);
