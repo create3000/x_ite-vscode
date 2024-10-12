@@ -355,16 +355,16 @@ class X3DPreview
                },
             },
          },
-         ... browser .getActiveLayer () ?
+         ... browser .getActiveNavigationInfo () ?
          {
             headlight: {
                name: "Headlight",
                type: "checkbox",
-               selected: browser .getActiveLayer () .getNavigationInfo () ._headlight .getValue (),
+               selected: browser .getActiveNavigationInfo () ._headlight .getValue (),
                events: {
                   click: () =>
                   {
-                     const navigationInfo = browser .getActiveLayer () ?.getNavigationInfo ();
+                     const navigationInfo = browser .getActiveNavigationInfo ();
 
                      if (!navigationInfo)
                         return;
