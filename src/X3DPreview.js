@@ -42,6 +42,8 @@ class X3DPreview
 
       toolbar .empty ();
 
+      // Play/Pause button
+
       const playButton = $("<button></button>")
          .attr ("title", "Toggle browser update on/off.")
          .addClass (["fa-solid", "fa-play"])
@@ -61,6 +63,8 @@ class X3DPreview
             .removeClass ("selected")
             .addClass (browser .isLive () ? "selected" : "unselected");
       });
+
+      // Background button
 
       {
          $("<span></span>") .addClass ("dot") .appendTo (toolbar);
@@ -89,6 +93,8 @@ class X3DPreview
 
          updateBackground ();
       }
+
+      // EnvironmentLight button
 
       if (browser .currentScene .encoding === "GLTF")
       {
@@ -119,6 +125,8 @@ class X3DPreview
          updateEnvironmentLight ();
       }
 
+      // View All button
+
       $("<span></span>") .addClass ("dot") .appendTo (toolbar);
 
       $("<button></button>")
@@ -129,6 +137,8 @@ class X3DPreview
             browser .viewAll ();
          })
          .appendTo (toolbar);
+
+      // Reveal/Conceal button
 
       const grip = $("<button></button>")
          .attr ("title", "Reveal/Conceal Toolbar.")
