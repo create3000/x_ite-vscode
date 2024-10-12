@@ -32,7 +32,7 @@ class X3DPreview
    updateToolbar ()
    {
       this .#toolbar ??= $("<div></div>")
-         .addClass ("toolbar")
+         .addClass (["toolbar", "panel"])
          .appendTo ($("body"));
 
       const
@@ -125,6 +125,66 @@ class X3DPreview
          updateEnvironmentLight ();
       }
 
+      // Animations button
+
+      const animations = this .getAnimations ();
+
+      if (animations ?.length)
+      {
+         $("<span></span>") .addClass ("dot") .appendTo (toolbar);
+
+         const button = $("<button></button>")
+            .attr ("title", "Start/Stop animations.")
+            .addClass (["fa-solid", "fa-play", "animations"])
+            .on ("click", () =>
+            {
+            })
+            .appendTo (toolbar);
+
+         const list = $("<ul></ul>")
+            .addClass ("panel")
+            .appendTo (button);
+
+         for (const animation of animations)
+         {
+            const timeSensor = animation .children [0];
+
+            const li = $("<li></li>") .appendTo (list);
+
+            const icon = $("<i></i>")
+               .addClass (["fa-solid", "fa-check"])
+               .css ("margin-right", 5);
+
+            const button = $("<button></button>")
+               .text (timeSensor .description)
+               .prepend (icon)
+               .appendTo (li)
+               .on ("click", () =>
+               {
+                  if (timeSensor .isActive)
+                  {
+                     timeSensor .stopTime = Date .now () / 1000;
+                  }
+                  else
+                  {
+                     timeSensor .loop      = true;
+                     timeSensor .startTime = Date .now () / 1000;
+                  }
+               });
+
+            const toggle = () =>
+            {
+               button
+                  .removeClass (["selected", "unselected"])
+                  .addClass (timeSensor .isActive ? "selected" : "unselected");
+            };
+
+            toggle ();
+
+            timeSensor .getField ("isActive") .addFieldCallback (this, toggle);
+         }
+      }
+
       // View All button
 
       $("<span></span>") .addClass ("dot") .appendTo (toolbar);
@@ -163,7 +223,7 @@ class X3DPreview
 
       if (!toolbar .observer)
       {
-         toolbar .observer = new ResizeObserver (updateToolbarPosition);
+         toolbar .observer = new ResizeObserver (() => updateToolbarPosition ());
 
          toolbar .observer .disconnect ();
          toolbar .observer .observe (toolbar [0], { childList: true });
@@ -278,6 +338,21 @@ class X3DPreview
       scene .addRootNode (this .#environmentLight);
 
       return this .#environmentLight;
+   }
+
+   getAnimations ()
+   {
+      try
+      {
+         const
+            browser = this .#browser,
+            scene   = browser .currentScene,
+            group   = scene .getExportedNode ("Animations");
+
+         return group .children;
+      }
+      catch
+      { }
    }
 
    receiveMessage ({ data })
