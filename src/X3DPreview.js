@@ -263,7 +263,6 @@ class X3DPreview
                .text (name)
                .prepend (icon)
                .appendTo (li)
-               .addClass (materialVariants .whichChoice === i ? "selected" : "unselected")
                .on ("click", () =>
                {
                   materialVariants .whichChoice = i;
@@ -281,6 +280,8 @@ class X3DPreview
          };
 
          materialVariants .getField ("whichChoice") .addFieldCallback (this, selectVariant);
+
+         selectVariant ();
       }
 
       // View All button
