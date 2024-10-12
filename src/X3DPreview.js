@@ -163,11 +163,21 @@ class X3DPreview
 
    async getEnvironmentLight ()
    {
+      const
+         browser = this .#browser,
+         scene   = browser .currentScene;
+
+      try
+      {
+         const group = scene .getExportedNode ("EnvironmentLights");
+
+         return group .children [0];
+      }
+      catch
+      { }
+
       if (!this .#environmentLight)
       {
-         const
-            browser = this .#browser,
-            scene   = browser .currentScene;
 
          scene .addComponent (browser .getComponent ("CubeMapTexturing"));
 
