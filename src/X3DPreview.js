@@ -312,10 +312,7 @@ class X3DPreview
                      type: "radio",
                      selected: localStorage .environmentImage === "cannon-exterior",
                      events: {
-                        click: () =>
-                        {
-                           this .setEnvironmentImage ("cannon-exterior", 2);
-                        },
+                        click: () => this .setEnvironmentImage ("cannon-exterior", 2) ,
                      },
                   },
                   helipad: {
@@ -323,10 +320,7 @@ class X3DPreview
                      type: "radio",
                      selected: localStorage .environmentImage === "helipad",
                      events: {
-                        click: () =>
-                        {
-                           this .setEnvironmentImage ("helipad", 1);
-                        },
+                        click: () => this .setEnvironmentImage ("helipad", 1),
                      },
                   },
                   footprint: {
@@ -334,10 +328,7 @@ class X3DPreview
                      type: "radio",
                      selected: localStorage .environmentImage === "footprint-court",
                      events: {
-                        click: () =>
-                        {
-                           this .setEnvironmentImage ("footprint-court", 1);
-                        },
+                        click: () => this .setEnvironmentImage ("footprint-court", 1),
                      },
                   },
                },
