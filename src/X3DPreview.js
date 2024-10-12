@@ -2,6 +2,22 @@ import X3D from "https://cdn.jsdelivr.net/npm/x_ite@latest/dist/x_ite.min.mjs";
 
 const vscode = acquireVsCodeApi ();
 
+Object .assign ($,
+{
+   try (callback, logError = false)
+   {
+      try
+      {
+         return callback ();
+      }
+      catch (error)
+      {
+         if (logError)
+            console .error (error .message);
+      }
+   },
+});
+
 class X3DPreview
 {
    #browser = X3D .getBrowser ();
@@ -39,6 +55,7 @@ class X3DPreview
 
       const
          browser      = this .#browser,
+         scene        = browser .currentScene,
          toolbar      = this .#toolbar,
          localStorage = this .#localStorage;
 
@@ -129,7 +146,7 @@ class X3DPreview
 
       // Animations button
 
-      const animations = this .getAnimations ();
+      const animations = $.try (() => scene .getExportedNode ("Animations") .children);
 
       if (animations ?.length)
       {
@@ -213,7 +230,7 @@ class X3DPreview
 
       // Animations button
 
-      const materialVariants = this .getMaterialVariants ();
+      const materialVariants = $.try (() => scene .getExportedNode ("MaterialVariants"));
 
       if (materialVariants)
       {
@@ -469,36 +486,6 @@ class X3DPreview
 
       localStorage .environmentIntensity = intensity;
       localStorage .environmentImage     = name;
-   }
-
-   getAnimations ()
-   {
-      try
-      {
-         const
-            browser = this .#browser,
-            scene   = browser .currentScene,
-            group   = scene .getExportedNode ("Animations");
-
-         return group .children;
-      }
-      catch
-      { }
-   }
-
-   getMaterialVariants ()
-   {
-      try
-      {
-         const
-            browser    = this .#browser,
-            scene      = browser .currentScene,
-            switchNode = scene .getExportedNode ("MaterialVariants");
-
-         return switchNode;
-      }
-      catch
-      { }
    }
 
    receiveMessage ({ data })
