@@ -245,9 +245,11 @@ class X3DPreview
             .addClass ("panel")
             .appendTo (button);
 
-         const entries = [... materialVariants .getValue () .getMetaData ("MaterialVariants/names") .entries ()];
+         const
+            entries = [... materialVariants .getValue () .getMetaData ("MaterialVariants/names") .entries ()],
+            buttons = [ ];
 
-         entries .unshift ([entries .length, "none"]);
+         entries .push ([entries .length, "none"]);
 
          for (const [i, name] of entries)
          {
@@ -261,14 +263,24 @@ class X3DPreview
                .text (name)
                .prepend (icon)
                .appendTo (li)
+               .addClass (materialVariants .whichChoice === i ? "selected" : "unselected")
                .on ("click", () =>
                {
                   materialVariants .whichChoice = i;
 
-                  list .find ("button") .removeClass ("selected") .addClass ("unselected");
-                  button .removeClass ("unselected") .addClass ("selected");
+                  selectVariant ();
                });
+
+            buttons .push (button);
          }
+
+         const selectVariant = () =>
+         {
+            list .find ("button") .removeClass ("selected") .addClass ("unselected");
+            buttons [materialVariants .whichChoice] .removeClass ("unselected") .addClass ("selected");
+         };
+
+         materialVariants .getField ("whichChoice") .addFieldCallback (this, selectVariant);
       }
 
       // View All button
