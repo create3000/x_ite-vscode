@@ -109,16 +109,13 @@ html, body, x3d-canvas {
    color: var(--system-gray3);
 }
 
-.toolbar .menu {
-   font-size: 9px;
-}
-
 .toolbar .menu ul {
    display: none;
    position: absolute;
    left: -3px;
    list-style: none;
    text-align: left;
+   font-size: 9px;
 }
 
 .toolbar .menu:hover ul {

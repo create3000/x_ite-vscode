@@ -211,6 +211,49 @@ class X3DPreview
          }
       }
 
+      // Animations button
+
+      const materialVariants = this .getMaterialVariants ();
+
+      if (materialVariants)
+      {
+         $("<span></span>") .addClass ("dot") .appendTo (toolbar);
+
+         const button = $("<button></button>")
+            .attr ("title", "Select a material variant.")
+            .addClass (["menu", "fa-solid", "fa-wand-sparkles"])
+            .appendTo (toolbar);
+
+         const list = $("<ul></ul>")
+            .addClass ("panel")
+            .appendTo (button);
+
+         const entries = [... materialVariants .getValue () .getMetaData ("MaterialVariants/names") .entries ()];
+
+         entries .unshift ([entries .length, "none"]);
+
+         for (const [i, name] of entries)
+         {
+            const li = $("<li></li>") .appendTo (list);
+
+            const icon = $("<i></i>")
+               .addClass (["fa-solid", "fa-check"])
+               .css ("margin-right", 5);
+
+            const button = $("<button></button>")
+               .text (name)
+               .prepend (icon)
+               .appendTo (li)
+               .on ("click", () =>
+               {
+                  materialVariants .whichChoice = i;
+
+                  list .find ("button") .removeClass ("selected") .addClass ("unselected");
+                  button .removeClass ("unselected") .addClass ("selected");
+               });
+         }
+      }
+
       // View All button
 
       $("<span></span>") .addClass ("dot") .appendTo (toolbar);
@@ -438,6 +481,21 @@ class X3DPreview
             group   = scene .getExportedNode ("Animations");
 
          return group .children;
+      }
+      catch
+      { }
+   }
+
+   getMaterialVariants ()
+   {
+      try
+      {
+         const
+            browser    = this .#browser,
+            scene      = browser .currentScene,
+            switchNode = scene .getExportedNode ("MaterialVariants");
+
+         return switchNode;
       }
       catch
       { }
