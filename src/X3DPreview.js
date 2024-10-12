@@ -245,9 +245,7 @@ class X3DPreview
             .addClass ("panel")
             .appendTo (button);
 
-         const
-            entries = [... materialVariants .getValue () .getMetaData ("MaterialVariants/names") .entries ()],
-            buttons = [ ];
+         const entries = [... materialVariants .getValue () .getMetaData ("MaterialVariants/names") .entries ()];
 
          entries .push ([entries .length, "none"]);
 
@@ -269,16 +267,16 @@ class X3DPreview
 
                   selectVariant ();
                });
-
-            buttons .push (button);
          }
 
          const selectVariant = () =>
          {
-            const button = buttons [materialVariants .whichChoice];
+            const
+               buttons = list .find ("button"),
+               button  = $(buttons [materialVariants .whichChoice]);
 
-            list .find ("button") .find (">:first-child") .removeClass ("fa-circle-dot") .addClass ("fa-circle");
-            list .find ("button") .removeClass ("selected") .addClass ("unselected");
+            buttons .find (">:first-child") .removeClass ("fa-circle-dot") .addClass ("fa-circle");
+            buttons .removeClass ("selected") .addClass ("unselected");
             button .find (">:first-child") .removeClass ("fa-circle") .addClass ("fa-circle-dot");
             button .removeClass ("unselected") .addClass ("selected");
          };
