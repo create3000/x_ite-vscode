@@ -71,6 +71,7 @@ html, body, x3d-canvas {
    color: var(--system-gray8);
 }
 
+.toolbar .selected,
 .toolbar button.selected {
    color: var(--system-green);
 }

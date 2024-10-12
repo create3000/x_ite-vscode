@@ -151,16 +151,25 @@ class X3DPreview
             }
          };
 
-         $("<span></span>")
+         const span = $("<span></span>")
             .addClass (["fa-solid", "fa-play"])
             .on ("click", () =>
             {
-               const isActive = animations .every (animation => animation .children [0] .isActive);
+               const isActive = animations .some (animation => animation .children [0] .isActive);
 
                for (const animation of animations)
                   toggleTimeSensor (animation .children [0], isActive);
             })
             .appendTo (button);
+
+         const toggleAll = () =>
+         {
+            const isActive = animations .some (animation => animation .children [0] .isActive);
+
+            span
+               .removeClass (["selected", "unselected"])
+               .addClass (isActive ? "selected" : "unselected");
+         };
 
          const list = $("<ul></ul>")
             .addClass ("panel")
@@ -190,6 +199,8 @@ class X3DPreview
                button
                   .removeClass (["selected", "unselected"])
                   .addClass (timeSensor .isActive ? "selected" : "unselected");
+
+               toggleAll ();
             };
 
             toggle ();
