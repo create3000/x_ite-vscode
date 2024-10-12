@@ -45,8 +45,9 @@ class X3DPreview
       this .redirectConsoleMessages ();
       this .updateToolbar ();
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
+      this .#browser .addBrowserCallback (this, X3D .X3DConstants .INITIALIZED_EVENT, () => this .updateToolbar ());
 
-      vscode .postMessage ({ command: "loaded" });
+      this .updateToolbar ();
    }
 
    updateToolbar ()
@@ -553,8 +554,6 @@ class X3DPreview
          activeViewpoint .nearDistance            = nearDistance,
          activeViewpoint .farDistance             = farDistance;
       }
-
-      this .updateToolbar ();
    }
 
    openLinkInExternalBrowser (url)

@@ -22,12 +22,16 @@ class X3DPanel
          filePath = textEditor .document .fileName,
          content  = textEditor .document .getText ();
 
-      const panel = this .#panels .get (filePath)
-         ?? this .createPanel (textEditor);
+      const
+         exists = this .#panels .has (filePath),
+         panel  = this .#panels .get (filePath) ?? this .createPanel (textEditor);
 
       panel .reveal (vscode .ViewColumn .Two);
 
-      this .updatePanel (panel, filePath, content);
+      this .watchFiles (panel);
+
+      if (exists)
+         this .updatePanel (panel, filePath, content);
 
       // this .setActivePanel (panel);
    }
@@ -73,11 +77,6 @@ class X3DPanel
 
    updatePanel (panel)
    {
-      this .watchFiles (panel);
-
-      if (!panel .loaded)
-         return;
-
       const
          filePath = panel .textEditor .document .fileName,
          src      = panel .webview .asWebviewUri (vscode .Uri .file (filePath));
@@ -89,7 +88,8 @@ class X3DPanel
    {
       const
          script = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.js"))),
-         css    = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.css")));
+         css    = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.css"))),
+         src    = panel .webview .asWebviewUri (vscode .Uri .file (panel .textEditor .document .fileName,));
 
       return /* html */ `<!DOCTYPE html>
 <html>
@@ -104,7 +104,8 @@ class X3DPanel
          debug="true"
          cache="false"
          splashScreen="false"
-         contentScale="auto">
+         contentScale="auto"
+         src="${src}">
    </x3d-canvas>
 </body>
 </html>`;
@@ -134,16 +135,6 @@ class X3DPanel
    {
       switch (message .command)
       {
-         case "loaded":
-         {
-            const
-               filePath = panel .textEditor .document .fileName,
-               src      = panel .webview .asWebviewUri (vscode .Uri .file (filePath));
-
-            panel .webview .postMessage ({ command: "load-url", src: src .toString () });
-            panel .loaded = true;
-            break;
-         }
          case "open-link":
          {
             const uri = vscode .Uri .parse (message .url);
