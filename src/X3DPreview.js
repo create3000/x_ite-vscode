@@ -258,6 +258,7 @@ class X3DPreview
    createUserMenu ()
    {
       const
+         browser      = this .#browser,
          toolbar      = this .#toolbar,
          localStorage = this .#localStorage;
 
@@ -278,6 +279,26 @@ class X3DPreview
                },
             },
          },
+         ... browser .getActiveLayer () ?
+         {
+            headlight: {
+               name: "Headlight",
+               type: "checkbox",
+               selected: browser .getActiveLayer () .getNavigationInfo () ._headlight .getValue (),
+               events: {
+                  click: () =>
+                  {
+                     const navigationInfo = browser .getActiveLayer () ?.getNavigationInfo ();
+
+                     if (!navigationInfo)
+                        return;
+
+                     navigationInfo ._headlight = !navigationInfo ._headlight .getValue ();
+                  },
+               },
+            },
+         }
+         : { },
       };
    }
 
