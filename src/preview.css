@@ -106,7 +106,7 @@ html, body, x3d-canvas {
 }
 
 .toolbar .animations ul li {
-   width: 200px;
+   min-width: 200px;
    padding: 2px;
 }
 
