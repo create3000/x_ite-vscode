@@ -17,6 +17,8 @@ class X3DPreview
          toolbarRevealed: true,
          background: false,
          ibl: true,
+         environmentImage: "helipad",
+         environmentIntensity: 1,
       });
 
       this .redirectConsoleMessages ();
@@ -259,6 +261,7 @@ class X3DPreview
    {
       const
          browser      = this .#browser,
+         scene        = browser .currentScene,
          toolbar      = this .#toolbar,
          localStorage = this .#localStorage;
 
@@ -299,6 +302,45 @@ class X3DPreview
             },
          }
          : { },
+         ... scene .encoding === "GLTF" ?
+         {
+            ibl: {
+               name: "Environment Image",
+               items: {
+                  cannon: {
+                     name: "Cannon Exterior",
+                     type: "radio",
+                     events: {
+                        click: () =>
+                        {
+                           this .setEnvironmentImage ("cannon-exterior", 2);
+                        },
+                     },
+                  },
+                  helipad: {
+                     name: "Helipad Goldenhour",
+                     type: "radio",
+                     events: {
+                        click: () =>
+                        {
+                           this .setEnvironmentImage ("helipad", 1);
+                        },
+                     },
+                  },
+                  footprint: {
+                     name: "Footprint Court",
+                     type: "radio",
+                     events: {
+                        click: () =>
+                        {
+                           this .setEnvironmentImage ("footprint-court", 1);
+                        },
+                     },
+                  },
+               },
+            },
+         }
+         : { },
       };
    }
 
@@ -328,8 +370,9 @@ class X3DPreview
    async getEnvironmentLight ()
    {
       const
-         browser = this .#browser,
-         scene   = browser .currentScene;
+         browser      = this .#browser,
+         scene        = browser .currentScene,
+         localStorage = this .#localStorage;
 
       try
       {
@@ -360,25 +403,35 @@ class X3DPreview
          diffuseTexture  .textureProperties = textureProperties;
          specularTexture .textureProperties = textureProperties;
 
-         environmentLight .intensity       = 1;
          environmentLight .color           = new X3D .SFColor (1, 1, 1);
          environmentLight .diffuseTexture  = diffuseTexture;
          environmentLight .specularTexture = specularTexture;
 
-         const
-            url         = new URL (`images/helipad`, import .meta .url),
-            diffuseURL  = new X3D .MFString (`${url}-diffuse.avif`),
-            specularURL = new X3D .MFString (`${url}-specular.avif`);
+         this .#environmentLight = environmentLight;
 
-         diffuseTexture  .url = diffuseURL;
-         specularTexture .url = specularURL;
-
-         this.#environmentLight = environmentLight;
+         this .setEnvironmentImage (localStorage .environmentImage, localStorage .environmentIntensity);
       }
 
       scene .addRootNode (this .#environmentLight);
 
       return this .#environmentLight;
+   }
+
+   setEnvironmentImage (name, intensity)
+   {
+      const
+         url              = new URL (`images/${name}`, import .meta .url),
+         diffuseURL       = new X3D .MFString (`${url}-diffuse.avif`),
+         specularURL      = new X3D .MFString (`${url}-specular.avif`),
+         environmentLight = this .#environmentLight,
+         localStorage     = this .#localStorage;
+
+      environmentLight .intensity            = intensity;
+      environmentLight .diffuseTexture  .url = diffuseURL;
+      environmentLight .specularTexture .url = specularURL;
+
+      localStorage .environmentIntensity = intensity;
+      localStorage .environmentImage     = name;
    }
 
    getAnimations ()
