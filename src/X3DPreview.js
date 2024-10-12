@@ -310,6 +310,7 @@ class X3DPreview
                   cannon: {
                      name: "Cannon Exterior",
                      type: "radio",
+                     selected: localStorage .environmentImage === "cannon-exterior",
                      events: {
                         click: () =>
                         {
@@ -320,6 +321,7 @@ class X3DPreview
                   helipad: {
                      name: "Helipad Goldenhour",
                      type: "radio",
+                     selected: localStorage .environmentImage === "helipad",
                      events: {
                         click: () =>
                         {
@@ -330,6 +332,7 @@ class X3DPreview
                   footprint: {
                      name: "Footprint Court",
                      type: "radio",
+                     selected: localStorage .environmentImage === "footprint-court",
                      events: {
                         click: () =>
                         {
