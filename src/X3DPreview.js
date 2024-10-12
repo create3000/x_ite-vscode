@@ -32,7 +32,7 @@ class X3DPreview
    updateToolbar ()
    {
       this .#toolbar ??= $("<div></div>")
-         .addClass (["toolbar", "panel"])
+         .addClass (["toolbar"])
          .appendTo ($("body"));
 
       const
