@@ -57,7 +57,7 @@ class X3DPreview
          })
          .appendTo (toolbar);
 
-      browser .getLive () .addFieldCallback ("preview", () =>
+      browser .getLive () .addFieldCallback (this, () =>
       {
          playButton
             .removeClass ("selected")
