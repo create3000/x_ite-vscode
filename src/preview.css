@@ -37,49 +37,11 @@ html, body, x3d-canvas {
    height: 100vh;
 }
 
-.panel {
-   backdrop-filter: blur(8px);
-   background: linear-gradient(to bottom, rgba(50,50,50,0.61803) 0%,rgba(0,0,0,0.61803) 100%);
-   background-clip: padding-box;
-   border: 4px solid rgba(60,60,60,0.61803);
-   border-radius: 5px;
-   margin: 0;
-   padding: 4px;
-}
-
 .toolbar {
    user-select: none;
    position: absolute;
    top: 20px;
    left: -4px;
-   border: 4px solid transparent;
-   margin: 0;
-   padding: 4px;
-}
-
-.toolbar::before {
-   content: " ";
-   position: absolute;
-   display: block;
-   box-sizing: border-box;
-   top: -4px;
-   left: -4px;
-   width: calc(100% + 8px);
-   height: calc(100% + 8px);
-   background: red;
-
-   backdrop-filter: blur(8px);
-   background: linear-gradient(to bottom, rgba(50,50,50,0.61803) 0%,rgba(0,0,0,0.61803) 100%);
-   background-clip: padding-box;
-   border: 4px solid rgba(60,60,60,0.61803);
-   border-radius: 5px;
-   margin: 0;
-   padding: 4px;
-}
-
-.toolbar .fa-solid,
-.toolbar .fa-regular {
-   position: relative;
 }
 
 .toolbar button {
@@ -142,4 +104,34 @@ html, body, x3d-canvas {
 .toolbar .animations ul button {
    font-family: var(--vscode-font-family);
    font-size: 12px;
+}
+
+.panel {
+   border: 4px solid transparent;
+   margin: 0;
+   padding: 4px;
+}
+
+.panel::before {
+   content: " ";
+   position: absolute;
+   display: block;
+   box-sizing: border-box;
+   top: -4px;
+   left: -4px;
+   width: calc(100% + 8px);
+   height: calc(100% + 8px);
+   background: red;
+
+   backdrop-filter: blur(8px);
+   background: linear-gradient(to bottom, rgba(50,50,50,0.61803) 0%,rgba(0,0,0,0.61803) 100%);
+   background-clip: padding-box;
+   border: 4px solid rgba(60,60,60,0.61803);
+   border-radius: 5px;
+   margin: 0;
+   padding: 4px;
+}
+
+.panel > * {
+   position: relative;
 }
