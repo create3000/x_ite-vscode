@@ -77,7 +77,7 @@ html, body, x3d-canvas {
 }
 
 .toolbar button.selected {
-   color: var(--system-red);
+   color: var(--system-green);
 }
 
 .toolbar span.dot::before {

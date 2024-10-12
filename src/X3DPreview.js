@@ -7,6 +7,7 @@ class X3DPreview
    #browser = X3D .getBrowser ();
    #localStorage = this .#browser .getLocalStorage () .addNameSpace ("VSCodePreview.");
    #toolbar;
+   #background;
    #environmentLight;
 
    constructor ()
@@ -14,6 +15,7 @@ class X3DPreview
       this .#localStorage .setDefaultValues ({
          toolbarVisible: true,
          toolbarRevealed: true,
+         background: false,
          ibl: true,
       });
 
@@ -60,11 +62,37 @@ class X3DPreview
             .addClass (browser .isLive () ? "selected" : "unselected");
       });
 
-      if (browser .currentScene .encoding === "GLTF")
       {
          $("<span></span>") .addClass ("dot") .appendTo (toolbar);
 
-         const light = this .getEnvironmentLight ();
+         const button = $("<button></button>")
+            .attr ("title", "Toggle background on/off.")
+            .addClass (["fa-solid", "fa-tree-city"])
+            .on ("click", () =>
+            {
+               localStorage .background = !localStorage .background;
+
+               updateBackground ();
+            })
+            .appendTo (toolbar);
+
+         const updateBackground = async () =>
+         {
+            button
+               .removeClass (["selected", "unselected"])
+               .addClass (localStorage .background ? "selected" : "unselected");
+
+            const background = await this .getBackground ();
+
+            background .set_bind = localStorage .background;
+         };
+
+         updateBackground ();
+      }
+
+      if (browser .currentScene .encoding === "GLTF")
+      {
+         $("<span></span>") .addClass ("dot") .appendTo (toolbar);
 
          const button = $("<button></button>")
             .attr ("title", "Toggle image base lighting on/off.")
@@ -77,13 +105,15 @@ class X3DPreview
             })
             .appendTo (toolbar);
 
-         const updateEnvironmentLight = () =>
+         const updateEnvironmentLight = async () =>
          {
             button
                .removeClass (["selected", "unselected"])
                .addClass (localStorage .ibl ? "selected" : "unselected");
 
-            light .then (light => light .on = localStorage .ibl);
+            const light = await this .getEnvironmentLight ();
+
+            light .on = localStorage .ibl;
          };
 
          updateEnvironmentLight ();
@@ -161,6 +191,29 @@ class X3DPreview
       };
    }
 
+   async getBackground ()
+   {
+      const
+         browser = this .#browser,
+         scene   = browser .currentScene;
+
+      if (!this .#background)
+      {
+         const background = scene .createNode ("Background");
+
+         background .skyAngle    = [0.8, 1.3, 1.4, 1.5708];
+         background .skyColor    = [0.21, 0.31, 0.59, 0.33, 0.45, 0.7, 0.57, 0.66, 0.85, 0.6, 0.73, 0.89, 0.7, 0.83, 0.98];
+         background .groundAngle = [0.659972, 1.2, 1.39912, 1.5708];
+         background .groundColor = [0.105712, 0.156051, 0.297, 0.187629, 0.255857, 0.398, 0.33604, 0.405546, 0.542, 0.3612, 0.469145, 0.602, 0.39471, 0.522059, 0.669];
+
+         this .#background = background;
+      }
+
+      scene .addRootNode (this .#background);
+
+      return this .#background;
+   }
+
    async getEnvironmentLight ()
    {
       const
@@ -209,10 +262,10 @@ class X3DPreview
          diffuseTexture  .url = diffuseURL;
          specularTexture .url = specularURL;
 
-         scene .addRootNode (environmentLight);
-
          this.#environmentLight = environmentLight;
       }
+
+      scene .addRootNode (this .#environmentLight);
 
       return this .#environmentLight;
    }
