@@ -138,6 +138,19 @@ class X3DPreview
             .addClass ("animations")
             .appendTo (toolbar);
 
+         const toggleTimeSensor = (timeSensor, isActive = timeSensor .isActive) =>
+         {
+            if (isActive)
+            {
+               timeSensor .stopTime = Date .now () / 1000;
+            }
+            else
+            {
+               timeSensor .loop      = true;
+               timeSensor .startTime = Date .now () / 1000;
+            }
+         };
+
          $("<span></span>")
             .addClass (["fa-solid", "fa-play"])
             .on ("click", () =>
@@ -145,19 +158,7 @@ class X3DPreview
                const isActive = animations .every (animation => animation .children [0] .isActive);
 
                for (const animation of animations)
-               {
-                  const timeSensor = animation .children [0];
-
-                  if (isActive)
-                  {
-                     timeSensor .stopTime = Date .now () / 1000;
-                  }
-                  else
-                  {
-                     timeSensor .loop      = true;
-                     timeSensor .startTime = Date .now () / 1000;
-                  }
-               }
+                  toggleTimeSensor (animation .children [0], isActive);
             })
             .appendTo (button);
 
@@ -181,15 +182,7 @@ class X3DPreview
                .appendTo (li)
                .on ("click", () =>
                {
-                  if (timeSensor .isActive)
-                  {
-                     timeSensor .stopTime = Date .now () / 1000;
-                  }
-                  else
-                  {
-                     timeSensor .loop      = true;
-                     timeSensor .startTime = Date .now () / 1000;
-                  }
+                  toggleTimeSensor (timeSensor);
                });
 
             const toggle = () =>
