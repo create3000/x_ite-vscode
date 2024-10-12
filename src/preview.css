@@ -79,29 +79,30 @@ html, body, x3d-canvas {
    color: var(--system-gray3);
 }
 
-.toolbar .animations {
+.toolbar .menu {
    position: relative;
    top: -2px;
+   left: -2px;
    font-size: 9px;
 }
 
-.toolbar .animations ul {
+.toolbar .menu ul {
    position: absolute;
    display: none;
    list-style: none;
    text-align: left;
 }
 
-.toolbar .animations:hover ul {
+.toolbar .menu:hover ul {
    display: block;
 }
 
-.toolbar .animations ul li {
+.toolbar .menu ul li {
    padding: 2px;
    white-space: nowrap;
 }
 
-.toolbar .animations ul button {
+.toolbar .menu ul button {
    font-family: var(--vscode-font-family);
    font-size: 12px;
 }
