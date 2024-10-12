@@ -64,14 +64,6 @@ html, body, x3d-canvas {
    font-size: 14px;
  }
 
-.toolbar button:not(:first-child) {
-   padding-left: 4px;
-}
-
-.toolbar button:not(:last-child) {
-   padding-right: 4px;
-}
-
 .toolbar button:hover {
    color: var(--system-gray8);
 }
@@ -89,5 +81,6 @@ html, body, x3d-canvas {
 }
 
 .toolbar .grip {
+   padding-left: 5px;
    color: var(--system-gray3);
 }
