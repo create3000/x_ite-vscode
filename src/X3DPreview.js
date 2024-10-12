@@ -121,7 +121,7 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Toggle image base lighting on/off.")
-            .addClass (["fa-regular", "fa-lightbulb"])
+            .addClass (["fa-solid", "fa-lightbulb"])
             .on ("click", () =>
             {
                localStorage .ibl = !localStorage .ibl;
