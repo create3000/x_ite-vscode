@@ -6,7 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [1.2.0]
 
-* Added Toolbar.
+* Added toolbar.
 
 ## [1.1.4]
 
