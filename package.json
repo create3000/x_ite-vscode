@@ -5,7 +5,7 @@
   "description": "Preview and debug X3D, glTF, VRML and other 3D models directly in the editor.",
   "version": "1.2.0",
   "license": "GPL-3.0",
-  "icon": "resources/icon.png",
+  "icon": "images/icon.png",
   "homepage": "https://create3000.github.io/x_ite/",
   "author": {
     "name": "Holger Seelig",
@@ -80,8 +80,8 @@
         "command": "x_ite-vscode.preview-model",
         "title": "X3D: Preview 3D Model",
         "icon": {
-          "dark": "./resources/icon.png",
-          "light": "./resources/icon.png"
+          "dark": "./images/icon.png",
+          "light": "./images/icon.png"
         }
       }
     ],
