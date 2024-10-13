@@ -360,21 +360,21 @@ class X3DPreview
                },
             },
          },
-         ... browser .getActiveNavigationInfo () ?
+         ... browser .activeNavigationInfo ?
          {
             headlight: {
                name: "Headlight",
                type: "checkbox",
-               selected: browser .getActiveNavigationInfo () ._headlight .getValue (),
+               selected: browser .activeNavigationInfo .headlight,
                events: {
                   click: () =>
                   {
-                     const navigationInfo = browser .getActiveNavigationInfo ();
+                     const navigationInfo = browser .activeNavigationInfo;
 
                      if (!navigationInfo)
                         return;
 
-                     navigationInfo ._headlight = !navigationInfo ._headlight .getValue ();
+                     navigationInfo .headlight = !navigationInfo .headlight;
                   },
                },
             },
@@ -528,31 +528,31 @@ class X3DPreview
       const
          browser         = this .#browser,
          worldURL        = browser .getWorldURL (),
-         activeViewpoint = browser .getActiveViewpoint ();
+         activeViewpoint = browser .activeViewpoint ?.getValue ();
 
       if (activeViewpoint)
       {
          var
-            positionOffset         = activeViewpoint ._positionOffset .copy (),
-            orientationOffset      = activeViewpoint ._orientationOffset .copy (),
-            centerOfRotationOffset = activeViewpoint ._centerOfRotationOffset .copy (),
-            fieldOfViewScale       = activeViewpoint ._fieldOfViewScale .getValue (),
-            nearDistance           = activeViewpoint .nearDistance,
-            farDistance            = activeViewpoint .farDistance;
+            userPosition         = activeViewpoint .getUserPosition () .copy (),
+            userOrientation      = activeViewpoint .getUserOrientation () .copy (),
+            userCenterOfRotation = activeViewpoint .getUserCenterOfRotation () .copy (),
+            fieldOfViewScale     = activeViewpoint .getFieldOfViewScale (),
+            nearDistance         = activeViewpoint .getNearDistance (),
+            farDistance          = activeViewpoint .getFarDistance ();
       }
 
       await browser .loadURL (new X3D .MFString (src));
 
-      if (browser .getWorldURL () === worldURL && activeViewpoint && browser .getActiveViewpoint ())
+      if (browser .getWorldURL () === worldURL && activeViewpoint && browser .activeViewpoint)
       {
-         const activeViewpoint = browser .getActiveViewpoint ();
+         const activeViewpoint = browser .activeViewpoint .getValue ();
 
-         activeViewpoint ._positionOffset         = positionOffset;
-         activeViewpoint ._orientationOffset      = orientationOffset;
-         activeViewpoint ._centerOfRotationOffset = centerOfRotationOffset;
-         activeViewpoint ._fieldOfViewScale       = fieldOfViewScale;
-         activeViewpoint .nearDistance            = nearDistance,
-         activeViewpoint .farDistance             = farDistance;
+         activeViewpoint .setUserPosition (userPosition);
+         activeViewpoint .setUserOrientation (userOrientation);
+         activeViewpoint .setUserCenterOfRotation (userCenterOfRotation);
+         activeViewpoint .setFieldOfViewScale (fieldOfViewScale);
+         activeViewpoint .setNearDistance (nearDistance);
+         activeViewpoint .setFarDistance (farDistance);
       }
    }
 
