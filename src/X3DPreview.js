@@ -123,7 +123,7 @@ class X3DPreview
          $("<span></span>") .addClass ("dot") .appendTo (toolbar);
 
          const button = $("<button></button>")
-            .attr ("title", "Toggle image base lighting on/off.")
+            .attr ("title", "Toggle image based lighting on/off.")
             .addClass (["fa-solid", "fa-lightbulb"])
             .on ("click", () =>
             {
