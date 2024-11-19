@@ -21,12 +21,6 @@ function bump ()
 	console .log (`New version ${version}`);
 }
 
-function commit (version)
-{
-	systemSync (`git commit -am 'Published version ${version}'`);
-	systemSync (`git push origin`);
-}
-
 function tags (version)
 {
 	systemSync (`git tag ${version}`);
@@ -51,11 +45,26 @@ function main ()
 
 	console .log (`Publishing X_ITE VS Code Extension v${version} now.`);
 
-   commit (version);
+	// Commit everything and switch to main branch.
+
+	systemSync (`git add -A`);
+	systemSync (`git commit -am 'Published version ${version}'`);
+	systemSync (`git push origin`);
+	systemSync (`git checkout main`);
+	systemSync (`git merge development`);
+
+	// Publish extension.
+
    tags (version);
 
    systemSync ("rm *.vsix");
    systemSync ("vsce package");
+
+	// Switch back to development branch.
+
+	systemSync (`git checkout development`);
+	systemSync (`git merge main`);
+	systemSync (`git push origin`);
 }
 
 main ();
