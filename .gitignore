@@ -1,5 +1,5 @@
 /node_modules/
 /package-lock.json
-.vscode-test.mjs
+/.vscode-test.mjs
 **/.DS_Store
 *.vsix
