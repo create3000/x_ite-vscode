@@ -115,6 +115,20 @@
           "group": "X3D"
         }
       ]
-    }
+    },
+    "languages": [
+      {
+        "id": "json",
+        "extensions": [
+          ".x3dj"
+        ]
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "*.x3dj",
+        "url": "./schemas/x3d-4.0-JSONSchema.json"
+      }
+    ]
   }
 }
