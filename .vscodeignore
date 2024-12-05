@@ -3,6 +3,7 @@
 test/**
 .gitignore
 .yarnrc
+.vscode-test.mjs
 vsc-extension-quickstart.md
 **/jsconfig.json
 **/*.map
