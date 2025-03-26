@@ -1,6 +1,6 @@
 # X_ITE VS Code Extension
 
-[![VS Code marketplace](https://img.shields.io/static/v1?label=VS%20Code%20Marketplace&message=gltf-vscode&color=blue)](https://marketplace.visualstudio.com/items?itemName=create3000.x-ite-vscode)
+[![VS Code marketplace](https://img.shields.io/static/v1?label=VS%20Code%20Marketplace&message=x-ite-vscode&color=blue)](https://marketplace.visualstudio.com/items?itemName=create3000.x-ite-vscode)
 [![DeepScan grade](https://deepscan.io/api/teams/23540/projects/28575/branches/920521/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=23540&pid=28575&bid=920521)
 
 This extension integrates the [X_ITE X3D Browser](https://create3000.github.io/x_ite/) into VS Code.
