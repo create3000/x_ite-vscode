@@ -59,6 +59,7 @@ function main ()
 
    systemSync ("rm *.vsix");
    systemSync ("vsce package");
+	systemSync (`git push origin`);
 
 	// Switch back to development branch.
 
