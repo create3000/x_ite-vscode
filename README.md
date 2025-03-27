@@ -38,3 +38,7 @@ Console messages from the preview are redirected to the Output panel of VS Code 
 ## License
 
 GPLv3, see [LICENSE.md](LICENSE.md).
+
+## See Also
+
+* [X_ITE VS Code Formatter](https://marketplace.visualstudio.com/items?itemName=create3000.x-ite-vscode-formatter)
