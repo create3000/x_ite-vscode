@@ -413,6 +413,18 @@ class X3DPreview
             },
          }
          : { },
+         "separator0": "--------",
+         mute: {
+            name: "Mute Audio",
+            type: "checkbox",
+            selected: browser .getBrowserOption ("Mute"),
+            events: {
+               click: () =>
+               {
+                  browser .setBrowserOption ("Mute", !browser .getBrowserOption ("Mute"));
+               },
+            },
+         },
       };
    }
 
