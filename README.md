@@ -37,7 +37,7 @@ Console messages from the preview are redirected to the Output panel of VS Code 
 
 ## License
 
-GPLv3, see [LICENSE.md](LICENSE.md).
+MIT, see [LICENSE.md](LICENSE.md).
 
 ## See Also
 
