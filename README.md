@@ -37,7 +37,7 @@ Console messages from the preview are redirected to the Output panel of VS Code 
 
 ## License
 
-MIT, see [LICENSE.md](LICENSE.md).
+This software is licensed under the [MIT License](LICENSE.md).
 
 ## See Also
 
