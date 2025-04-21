@@ -35,6 +35,7 @@ class X3DPreview
          ibl: true,
          environmentImage: "helipad",
          environmentIntensity: 1,
+         mute: false,
       });
 
       window .addEventListener ("storage", () => this .updateToolbar ());
@@ -48,6 +49,7 @@ class X3DPreview
       this .#browser .addBrowserCallback (this, X3D .X3DConstants .INITIALIZED_EVENT, () => this .updateToolbar ());
 
       this .updateToolbar ();
+      this .updateMute ();
    }
 
    updateToolbar ()
@@ -417,11 +419,12 @@ class X3DPreview
          mute: {
             name: "Mute Audio",
             type: "checkbox",
-            selected: browser .getBrowserOption ("Mute"),
+            selected: localStorage .mute,
             events: {
                click: () =>
                {
-                  browser .setBrowserOption ("Mute", !browser .getBrowserOption ("Mute"));
+                  localStorage .mute = !localStorage .mute;
+                  this .updateMute ();
                },
             },
          },
@@ -516,6 +519,15 @@ class X3DPreview
 
       localStorage .environmentIntensity = intensity;
       localStorage .environmentImage     = name;
+   }
+
+   updateMute ()
+   {
+      const
+         browser      = this .#browser,
+         localStorage = this .#localStorage;
+
+      browser .setBrowserOption ("Mute", localStorage .mute);
    }
 
    receiveMessage ({ data })
