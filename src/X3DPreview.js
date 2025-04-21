@@ -415,7 +415,6 @@ class X3DPreview
             },
          }
          : { },
-         "separator0": "--------",
          mute: {
             name: "Mute Audio",
             type: "checkbox",
