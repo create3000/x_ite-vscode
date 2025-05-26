@@ -70,7 +70,7 @@ class X3DPreview
 
       const playButton = $("<button></button>")
          .attr ("title", "Toggle browser update on/off.")
-         .addClass ("material-symbols-outlined")
+         .addClass ("material-icons")
          .addClass (browser .isLive () ? "selected" : "unselected")
          .text ("play_arrow")
          .on ("click", () =>
