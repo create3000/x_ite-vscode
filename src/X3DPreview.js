@@ -70,8 +70,9 @@ class X3DPreview
 
       const playButton = $("<button></button>")
          .attr ("title", "Toggle browser update on/off.")
-         .addClass (["fa-solid", "fa-play"])
+         .addClass ("material-symbols-outlined")
          .addClass (browser .isLive () ? "selected" : "unselected")
+         .text ("play_arrow")
          .on ("click", () =>
          {
             if (browser .isLive ())
@@ -95,7 +96,8 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Toggle background on/off.")
-            .addClass (["fa-solid", "fa-tree-city"])
+            .addClass ("material-symbols-outlined")
+            .text ("landscape")
             .on ("click", () =>
             {
                localStorage .background = !localStorage .background;
@@ -126,7 +128,8 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Toggle image based lighting on/off.")
-            .addClass (["fa-solid", "fa-lightbulb"])
+            .addClass ("material-symbols-outlined")
+            .text ("lightbulb")
             .on ("click", () =>
             {
                localStorage .ibl = !localStorage .ibl;
@@ -159,7 +162,15 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Start/Stop animations.")
-            .addClass (["animations", "menu"])
+            .addClass (["animations", "menu", "material-symbols-outlined"])
+            .text ("play_circle")
+            .on ("click", () =>
+            {
+               const isActive = animations .some (animation => animation .children [0] .isActive);
+
+               for (const animation of animations)
+                  toggleTimeSensor (animation .children [0], isActive);
+            })
             .appendTo (toolbar);
 
          const toggleTimeSensor = (timeSensor, isActive = timeSensor .isActive) =>
@@ -175,22 +186,11 @@ class X3DPreview
             }
          };
 
-         const span = $("<span></span>")
-            .addClass (["fa-solid", "fa-play"])
-            .on ("click", () =>
-            {
-               const isActive = animations .some (animation => animation .children [0] .isActive);
-
-               for (const animation of animations)
-                  toggleTimeSensor (animation .children [0], isActive);
-            })
-            .appendTo (button);
-
          const toggleAll = () =>
          {
             const isActive = animations .some (animation => animation .children [0] .isActive);
 
-            span
+            button
                .removeClass (["selected", "unselected"])
                .addClass (isActive ? "selected" : "unselected");
          };
@@ -205,9 +205,9 @@ class X3DPreview
 
             const li = $("<li></li>") .appendTo (list);
 
-            const icon = $("<i></i>")
-               .addClass (["fa-solid", "fa-check"])
-               .css ("margin-right", 5);
+            const icon = $("<span></span>")
+               .addClass ("material-symbols-outlined")
+               .text ("check_circle");
 
             const button = $("<button></button>")
                .text (timeSensor .description)
@@ -243,7 +243,8 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Select a material variant.")
-            .addClass (["menu", "fa-solid", "fa-wand-sparkles"])
+            .addClass (["menu", "material-symbols-outlined"])
+            .text ("palette")
             .appendTo (toolbar);
 
          const list = $("<ul></ul>")
@@ -258,9 +259,9 @@ class X3DPreview
          {
             const li = $("<li></li>") .appendTo (list);
 
-            const icon = $("<i></i>")
-               .addClass (["fa-solid", "fa-circle"])
-               .css ("margin-right", 5);
+            const icon = $("<span></span>")
+               .addClass ("material-symbols-outlined")
+               .text ("check_circle");
 
             const button = $("<button></button>")
                .text (name)
@@ -297,7 +298,8 @@ class X3DPreview
 
       $("<button></button>")
          .attr ("title", "View all objects in scene.")
-         .addClass (["fa-solid", "fa-arrows-to-dot"])
+         .addClass ("material-symbols-outlined")
+         .text ("center_focus_strong")
          .on ("click", () =>
          {
             browser .viewAll ();
@@ -308,7 +310,8 @@ class X3DPreview
 
       const grip = $("<button></button>")
          .attr ("title", "Reveal/Conceal Toolbar.")
-         .addClass (["fa-solid", "fa-grip-lines-vertical", "grip"])
+         .addClass (["material-symbols-outlined", "grip"])
+         .text ("drag_indicator")
          .on ("click", () =>
          {
             localStorage .toolbarRevealed = !localStorage .toolbarRevealed;
