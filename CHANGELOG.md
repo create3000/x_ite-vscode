@@ -4,6 +4,10 @@ All notable changes to the "x-ite-vscode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.6]
+
+* Handle light and dark themes.
+
 ## [1.2.5]
 
 * Store Mute state in localstorage.
