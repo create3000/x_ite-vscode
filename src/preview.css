@@ -85,7 +85,7 @@ html, body, x3d-canvas {
 .panel {
    border: 4px solid transparent;
    margin: 0;
-   padding: 4px 4px 2px 4px;
+   padding: 2px 0px 1px 2px;
 }
 
 .panel::before {
@@ -110,6 +110,10 @@ html, body, x3d-canvas {
 
 .panel > * {
    position: relative;
+}
+
+.panel .panel {
+   padding: 0px 0px 4px 2px;
 }
 
 .toolbar {

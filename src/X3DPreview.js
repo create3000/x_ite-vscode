@@ -162,7 +162,11 @@ class X3DPreview
 
          const button = $("<button></button>")
             .attr ("title", "Start/Stop animations.")
-            .addClass (["animations", "menu", "material-symbols-outlined"])
+            .addClass (["animations", "menu"])
+            .appendTo (toolbar);
+
+         const play = $("<span></span>")
+            .addClass ("material-symbols-outlined")
             .text ("play_circle")
             .on ("click", () =>
             {
@@ -171,7 +175,7 @@ class X3DPreview
                for (const animation of animations)
                   toggleTimeSensor (animation .children [0], isActive);
             })
-            .appendTo (toolbar);
+            .appendTo (button);
 
          const toggleTimeSensor = (timeSensor, isActive = timeSensor .isActive) =>
          {
@@ -213,10 +217,7 @@ class X3DPreview
                .text (timeSensor .description)
                .prepend (icon)
                .appendTo (li)
-               .on ("click", () =>
-               {
-                  toggleTimeSensor (timeSensor);
-               });
+               .on ("click", () => toggleTimeSensor (timeSensor));
 
             const toggle = () =>
             {
