@@ -151,7 +151,7 @@ html, body, x3d-canvas {
    position: relative;
    top: -4px;
    margin: 0 4px 0 4px;
-   color: var(--text-color);
+   color: var(--system-gray0);
 }
 
 .toolbar .grip {
