@@ -548,6 +548,11 @@ class X3DPreview
             this .loadURL (data .src);
             break;
          }
+         case "display-error":
+         {
+            this .showError (data .text ?? String (data .args ?? data));
+            break;
+         }
       }
    }
 
@@ -571,6 +576,9 @@ class X3DPreview
 
       await browser .loadURL (new X3D .MFString (src));
 
+   // clear any previous error once load succeeds
+   this .clearError ();
+
       if (browser .getWorldURL () === worldURL && activeViewpoint && browser .activeViewpoint)
       {
          const activeViewpoint = browser .activeViewpoint .getValue ();
@@ -582,6 +590,50 @@ class X3DPreview
          activeViewpoint .setNearDistance (nearDistance);
          activeViewpoint .setFarDistance (farDistance);
       }
+   }
+
+   showError (text)
+   {
+      try
+      {
+         this .clearError ();
+
+         const overlay = document .createElement ("div");
+         overlay .className = "error-overlay";
+
+         const header = document .createElement ("div");
+         header .className = "error-header";
+         header .textContent = "Preview Error";
+
+         const close = document .createElement ("button");
+         close .className = "error-close";
+         close .textContent = "×";
+         close .title = "Close";
+         close .addEventListener ("click", () => this .clearError ());
+
+         header .appendChild (close);
+
+         const pre = document .createElement ("pre");
+         pre .className = "error-text";
+         pre .textContent = String (text ?? "Unknown error");
+
+         overlay .appendChild (header);
+         overlay .appendChild (pre);
+
+         document .body .appendChild (overlay);
+      }
+      catch (e)
+      {
+         console .error (e .message);
+      }
+   }
+
+   clearError ()
+   {
+      const existing = document .querySelector (".error-overlay");
+
+      if (existing)
+         existing .remove ();
    }
 
    openLinkInExternalBrowser (url)

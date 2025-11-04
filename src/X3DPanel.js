@@ -149,6 +149,18 @@ class X3DPanel
          {
             console [message .command] (... message .args);
             this .#outputChannel [message .command] (message .args .join (" "));
+            // forward errors back to the webview so the preview can display them
+            if (message .command === "error")
+            {
+               try
+               {
+                  panel .webview .postMessage ({ command: "display-error", text: message .args .join (" ") });
+               }
+               catch (e)
+               {
+                  console .error (e .message);
+               }
+            }
             break;
          }
       }
