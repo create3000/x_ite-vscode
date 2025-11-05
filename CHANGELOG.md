@@ -4,6 +4,10 @@ All notable changes to the "x-ite-vscode" extension will be documented in this f
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.2.10]
+
+* Display console messages in an overlay window.
+
 ## [1.2.8]
 
 * Improve CSS styles.
