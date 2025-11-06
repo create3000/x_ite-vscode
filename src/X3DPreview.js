@@ -662,11 +662,8 @@ class X3DPreview
          };
       }
 
-      console .log   = output (console .log,   "log");
-      console .info  = output (console .info,  "info");
-      console .warn  = output (console .warn,  "warn");
-      console .error = output (console .error, "error");
-      console .debug = output (console .debug, "debug");
+      for (const command of ["log", "info", "warn", "error", "debug"])
+         console [command] = output (console [command], command);
    }
 }
 
