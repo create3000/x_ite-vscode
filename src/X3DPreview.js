@@ -612,6 +612,8 @@ class X3DPreview
       /AbortError:\s*signal is aborted/,
    ];
 
+   #messageTime = 0;
+
    addConsoleMessage (level, message)
    {
       if (this .excludes .some (exclude => exclude .test (message)))
@@ -620,8 +622,15 @@ class X3DPreview
       message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "")
 
       const
-         console  = $("#console") .show (),
-         text     = $("<p></p>") .addClass (level) .text (message),
+         console = $("#console") .show (),
+         text    = $("<p></p>") .addClass (level) .text (message);
+
+      if (this .#messageTime && performance .now () - this .#messageTime > 1000)
+         console .append ($("<p></p>") .addClass ("splitter"));
+
+      this .#messageTime = performance .now ();
+
+      const
          children = console .children (),
          last     = children .last ();
 
