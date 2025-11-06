@@ -107,7 +107,7 @@ class X3DPanel
          contentScale="auto"
          src="${src}">
    </x3d-canvas>
-   <div id="console"></div>
+   <div id="console" title="Console"></div>
 </body>
 </html>`;
    }
