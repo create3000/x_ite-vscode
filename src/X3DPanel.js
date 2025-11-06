@@ -107,6 +107,7 @@ class X3DPanel
          contentScale="auto"
          src="${src}">
    </x3d-canvas>
+   <div id="console"></div>
 </body>
 </html>`;
    }
@@ -130,6 +131,11 @@ class X3DPanel
       panel .watchers .length = 0;
    }
 
+   excludes = [
+      /AbortError:\s*signal is aborted/,
+      /Couldn't load URL .*vscode-resource/,
+   ];
+
    didReceiveMessage (panel, message)
    {
       switch (message .command)
@@ -149,32 +155,15 @@ class X3DPanel
          {
             const text = message .args .join (" ");
 
-            // Ignore benign AbortError messages produced when a webview's
-            // resource load is aborted.
-            // Example: "Couldn't load URL 'https://file+.vscode-resource.vscode-cdn.net/...'. AbortError: signal is aborted without reason"
-            const isBenignAbort = /AbortError:\s*signal is aborted/i.test (text)
-               || /Couldn't load URL .*vscode-resource.*AbortError/i.test (text);
-
-            if (message .command === "error" && isBenignAbort)
-            {
-               return;
-            }
+            if (this .excludes .some (exclude => exclude .test (text)))
+               break;
 
             console [message .command] (... message .args);
             this .#outputChannel [message .command] (text);
 
             // forward errors back to the webview so the preview can display them
-            if (message .command === "error")
-            {
-               try
-               {
-                  panel .webview .postMessage ({ command: "display-error", text });
-               }
-               catch (e)
-               {
-                  console .error (e .message);
-               }
-            }
+            panel .webview .postMessage ({ command: "console-message", level: message .command, text });
+
             break;
          }
       }

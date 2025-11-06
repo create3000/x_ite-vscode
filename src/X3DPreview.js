@@ -20,6 +20,13 @@ Object .assign ($,
 
 class X3DPreview
 {
+   static #preview;
+
+   static run ()
+   {
+      this .#preview = new X3DPreview ();
+   }
+
    #browser = X3D .getBrowser ();
    #localStorage = this .#browser .getLocalStorage () .addNameSpace ("VSCodePreview.");
    #toolbar;
@@ -548,9 +555,9 @@ class X3DPreview
             this .loadURL (data .src);
             break;
          }
-         case "display-error":
+         case "console-message":
          {
-            this .showError (data .text ?? String (data .args ?? data));
+            this .addConsoleMessage (data .level, data .text);
             break;
          }
       }
@@ -574,10 +581,17 @@ class X3DPreview
             farDistance          = activeViewpoint .getFarDistance ();
       }
 
-      await browser .loadURL (new X3D .MFString (src));
+      // Clear any previous error before load succeeds or fails.
+      this .clearConsole ();
 
-   // clear any previous error once load succeeds
-   this .clearError ();
+      try
+      {
+         await browser .loadURL (new X3D .MFString (src));
+      }
+      catch (error)
+      {
+         console .error (error);
+      }
 
       if (browser .getWorldURL () === worldURL && activeViewpoint && browser .activeViewpoint)
       {
@@ -592,48 +606,23 @@ class X3DPreview
       }
    }
 
-   showError (text)
+   addConsoleMessage (level, text)
    {
-      try
-      {
-         this .clearError ();
+      const console = $("#console");
 
-         const overlay = document .createElement ("div");
-         overlay .className = "error-overlay";
+      $("<p></p>")
+         .addClass (level)
+         .text (text)
+         .appendTo (console);
 
-         const header = document .createElement ("div");
-         header .className = "error-header";
-         header .textContent = "Preview Error";
-
-         const close = document .createElement ("button");
-         close .className = "error-close";
-         close .textContent = "×";
-         close .title = "Close";
-         close .addEventListener ("click", () => this .clearError ());
-
-         header .appendChild (close);
-
-         const pre = document .createElement ("pre");
-         pre .className = "error-text";
-         pre .textContent = String (text ?? "Unknown error");
-
-         overlay .appendChild (header);
-         overlay .appendChild (pre);
-
-         document .body .appendChild (overlay);
-      }
-      catch (e)
-      {
-         console .error (e .message);
-      }
+      console .show ();
    }
 
-   clearError ()
+   clearConsole ()
    {
-      const existing = document .querySelector (".error-overlay");
-
-      if (existing)
-         existing .remove ();
+      $("#console")
+         .hide ()
+         .empty ();
    }
 
    openLinkInExternalBrowser (url)

@@ -74,6 +74,15 @@ html, body, x3d-canvas {
    height: 100vh;
 }
 
+body {
+   display: flex;
+   flex-direction: column;
+}
+
+x3d-canvas {
+   flex: 1 1 auto;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -188,47 +197,18 @@ html, body, x3d-canvas {
    margin-right: 3px;;
 }
 
-.error-overlay {
-   position: fixed;
-   left: 10px;
-   right: 10px;
-   top: 10px;
-   z-index: 9999;
-   background: rgba(60, 10, 10, 0.92);
-   color: white;
-   border-radius: 6px;
-   border: 2px solid rgba(255, 80, 80, 0.9);
-   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-   max-height: 40vh;
-   overflow: auto;
-   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Segoe UI Mono', monospace;
+#console {
+   flex: 0 0 auto;
 }
 
-.error-overlay .error-header {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   padding: 8px 12px;
-   font-weight: 600;
-   font-size: 13px;
-   background: linear-gradient(to right, rgba(120,20,20,0.95), rgba(80,10,10,0.85));
-   border-top-left-radius: 4px;
-   border-top-right-radius: 4px;
+#console .info {
+   color: var(--system-blue);
 }
 
-.error-overlay .error-close {
-   background: transparent;
-   border: none;
-   color: white;
-   font-size: 18px;
-   line-height: 1;
-   cursor: pointer;
+#console .warn {
+   color: var(--system-yellow);
 }
 
-.error-overlay .error-text {
-   white-space: pre-wrap;
-   margin: 0;
-   padding: 12px;
-   font-size: 12px;
-   color: #fff;
+#console .error {
+   color: var(--system-red);
 }
