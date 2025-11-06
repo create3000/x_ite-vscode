@@ -619,13 +619,9 @@ class X3DPreview
 
       message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "")
 
-      const console = $("#console") .show ()
-
-      const text = $("<p></p>")
-         .addClass (level)
-         .text (message);
-
       const
+         console  = $("#console") .show (),
+         text     = $("<p></p>") .addClass (level) .text (message),
          children = console .children (),
          last     = children .last ();
 
