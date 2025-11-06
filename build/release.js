@@ -9,10 +9,17 @@ function bump ()
 
 	console .log (`Current version ${current}`);
 
-   const last = sh (`ls *.vsix`) .trim () .match (/(\d+\.\d+\.\d+)/) ?.[1];
+   try
+	{
+		const last = sh (`ls *.vsix`) .trim () .match (/(\d+\.\d+\.\d+)/) ?.[1];
 
-   if (current !== last)
-      return;
+	   if (current !== last)
+   	   return;
+	}
+	catch (error)
+	{
+		console .error (error);
+	}
 
 	systemSync (`npm version patch --no-git-tag-version --force`);
 
