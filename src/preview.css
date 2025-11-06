@@ -215,6 +215,10 @@ x3d-canvas {
   font-size: 8pt;
 }
 
+#console p:first-child {
+  margin-top: 0px;
+}
+
 #console .info {
   color: var(--system-blue);
 }
