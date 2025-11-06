@@ -606,16 +606,26 @@ class X3DPreview
       }
    }
 
-   addConsoleMessage (level, text)
+   addConsoleMessage (level, message)
    {
-      const console = $("#console");
+      const
+         console = $("#console") .show (),
+         last    = console .children (":last-child");
 
-      $("<p></p>")
+      const text = $("<p></p>")
          .addClass (level)
-         .text (text)
-         .appendTo (console);
+         .text (message);
 
-      console .show ();
+      if (last .hasClass (level))
+      {
+         last .css ("margin-bottom", "0");
+         text .css ("margin-top",    "0");
+         last .css ("border-bottom", "none");
+         text .css ("border-top",    "none");
+      }
+
+      console .append (text);
+      console .scrollTop (console .prop ("scrollHeight"));
    }
 
    clearConsole ()
