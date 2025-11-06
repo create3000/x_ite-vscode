@@ -619,7 +619,7 @@ class X3DPreview
       if (this .excludes .some (exclude => exclude .test (message)))
          return;
 
-      message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "")
+      message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "");
 
       const
          console = $("#console") .show (),
