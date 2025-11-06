@@ -148,11 +148,8 @@ class X3DPanel
          case "error":
          case "debug":
          {
-            const text = message .args .join (" ");
-
             console [message .command] (... message .args);
-            this .#outputChannel [message .command] (text);
-
+            this .#outputChannel [message .command] (message .args);
             break;
          }
       }

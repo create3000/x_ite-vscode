@@ -657,8 +657,10 @@ class X3DPreview
          {
             log .apply (console, args);
 
-            vscode .postMessage ({ command, args: args .map (String) });
-            this .addConsoleMessage (command, args .join (" "));
+            const message = args .join (" ");
+
+            vscode .postMessage ({ command, args: message });
+            this .addConsoleMessage (command, message);
          };
       }
 
