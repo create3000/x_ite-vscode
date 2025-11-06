@@ -658,7 +658,7 @@ class X3DPreview
             log .apply (console, args);
 
             vscode .postMessage ({ command, args: args .map (String) });
-            this .addConsoleMessage (command, args .map (String) .join (" "));
+            this .addConsoleMessage (command, args .join (" "));
          };
       }
 
