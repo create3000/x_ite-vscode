@@ -606,8 +606,17 @@ class X3DPreview
       }
    }
 
+   excludes = [
+      /AbortError:\s*signal is aborted/,
+   ];
+
    addConsoleMessage (level, message)
    {
+      if (this .excludes .some (exclude => exclude .test (message)))
+         return;
+
+      message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "")
+
       const
          console = $("#console") .show (),
          last    = console .children (":last-child");
@@ -618,9 +627,9 @@ class X3DPreview
 
       if (last .hasClass (level))
       {
-         last .css ("margin-bottom", "0");
-         text .css ("margin-top",    "0");
+         last .css ("margin-bottom", "0px");
          last .css ("border-bottom", "none");
+         text .css ("margin-top",    "0px");
          text .css ("border-top",    "none");
       }
 
@@ -642,13 +651,14 @@ class X3DPreview
 
    redirectConsoleMessages ()
    {
-      function output (log, command)
+      const output = (log, command) =>
       {
-         return function (... args)
+         return (... args) =>
          {
-            log .apply (this, args);
+            log .apply (console, args);
 
             vscode .postMessage ({ command, args: args .map (String) });
+            this .addConsoleMessage (command, args .map (String) .join (" "));
          };
       }
 

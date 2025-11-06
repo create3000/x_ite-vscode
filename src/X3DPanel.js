@@ -131,11 +131,6 @@ class X3DPanel
       panel .watchers .length = 0;
    }
 
-   excludes = [
-      /AbortError:\s*signal is aborted/,
-      /Couldn't load URL .*vscode-resource/,
-   ];
-
    didReceiveMessage (panel, message)
    {
       switch (message .command)
@@ -155,14 +150,8 @@ class X3DPanel
          {
             const text = message .args .join (" ");
 
-            if (this .excludes .some (exclude => exclude .test (text)))
-               break;
-
             console [message .command] (... message .args);
             this .#outputChannel [message .command] (text);
-
-            // forward errors back to the webview so the preview can display them
-            panel .webview .postMessage ({ command: "console-message", level: message .command, text });
 
             break;
          }
