@@ -606,6 +606,8 @@ class X3DPreview
       }
    }
 
+   CONSOLE_MAX = 1000;
+
    excludes = [
       /AbortError:\s*signal is aborted/,
    ];
@@ -617,13 +619,15 @@ class X3DPreview
 
       message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "")
 
-      const
-         console = $("#console") .show (),
-         last    = console .children (":last-child");
+      const console = $("#console") .show ()
 
       const text = $("<p></p>")
          .addClass (level)
          .text (message);
+
+      const
+         children = console .children (),
+         last     = children .last ();
 
       if (last .hasClass (level))
       {
@@ -635,6 +639,8 @@ class X3DPreview
             .css ("margin-top", "0px")
             .css ("border-top", "none");
       }
+
+      children .slice (0, Math .max (children .length - this .CONSOLE_MAX, 0)) .remove ();
 
       console .append (text);
       console .scrollTop (console .prop ("scrollHeight"));
