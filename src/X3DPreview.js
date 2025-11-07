@@ -649,15 +649,7 @@ class X3DPreview
 
       this .#messageTime = performance .now ();
 
-      const
-         children = console .children (),
-         last     = children .last ();
-
-      if (last .hasClass (level))
-      {
-         last .css ("border-bottom", "none");
-         text .css ("border-top",    "none");
-      }
+      const children = console .children ();
 
       children .slice (0, Math .max (children .length - this .CONSOLE_MAX, 0)) .remove ();
 
