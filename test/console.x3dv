@@ -1,0 +1,137 @@
+#X3D V4.1 utf8 X_ITE V12.1.4
+
+PROFILE Interchange
+
+COMPONENT PointingDeviceSensor : 1
+COMPONENT Scripting : 1
+
+META "created" "Mon, 08 Sep 2025 11:08:51 GMT"
+META "creator" "Holger Seelig"
+META "generator" "Sunrize X3D Editor V1.11.4, https://create3000.github.io/sunrize/"
+META "modified" "Fri, 07 Nov 2025 06:59:37 GMT"
+
+DEF Script Script {
+  inputOnly SFTime set_debug
+  inputOnly SFTime set_log
+  inputOnly SFTime set_info
+  inputOnly SFTime set_warn
+  inputOnly SFTime set_error
+
+  url "ecmascript:
+function initialize ()
+{
+  console .log ('ecmascript', 123);
+}
+
+function set_debug (v, t)
+{
+  console .debug ('debug', t);
+}
+
+function set_log (v, t)
+{
+  console .log ('log', t);
+}
+
+function set_info (v, t)
+{
+  console .info ('info', t);
+}
+
+function set_warn (v, t)
+{
+  console .warn ('warn', t);
+}
+
+function set_error (v, t)
+{
+  console .error ('error', t);
+}
+"
+}
+
+Viewpoint {
+  position 6 0 21.99454
+  centerOfRotation 6 0 0
+}
+
+DEF Debug Transform {
+  translation -2 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.2666667 0.2666667 0.2666667
+        }
+      }
+      geometry Box { }
+    }
+    DEF Touch1_1 TouchSensor { }
+  ]
+}
+
+DEF Log Transform {
+  translation 2 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.6 0.6 0.6
+        }
+      }
+      geometry Box { }
+    }
+    DEF Touch2_1 TouchSensor { }
+  ]
+}
+
+DEF Info Transform {
+  translation 6 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.1607843 0.5254902 0.8
+        }
+      }
+      geometry Box { }
+    }
+    DEF Touch1 TouchSensor { }
+  ]
+}
+
+DEF Warn Transform {
+  translation 10 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.945098 0.7607843 0.1960784
+        }
+      }
+      geometry Box { }
+    }
+    DEF Touch2_2 TouchSensor { }
+  ]
+}
+
+DEF Error Transform {
+  translation 14 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0 0
+        }
+      }
+      geometry Box { }
+    }
+    DEF Touch2 TouchSensor { }
+  ]
+}
+
+ROUTE Touch1_1.touchTime TO Script.set_debug
+ROUTE Touch2_1.touchTime TO Script.set_log
+ROUTE Touch1.touchTime TO Script.set_info
+ROUTE Touch2_2.touchTime TO Script.set_warn
+ROUTE Touch2.touchTime TO Script.set_error

@@ -625,7 +625,7 @@ class X3DPreview
          console = $("#console") .show (),
          text    = $("<p></p>") .addClass (level) .text (message);
 
-      if (this .#messageTime && performance .now () - this .#messageTime > 1000)
+      if (performance .now () - this .#messageTime > 1000)
          console .append ($("<p></p>") .addClass ("splitter"));
 
       this .#messageTime = performance .now ();
@@ -636,13 +636,8 @@ class X3DPreview
 
       if (last .hasClass (level))
       {
-         last
-            .css ("margin-bottom", "0px")
-            .css ("border-bottom", "none");
-
-         text
-            .css ("margin-top", "0px")
-            .css ("border-top", "none");
+         last .css ("border-bottom", "none");
+         text .css ("border-top",    "none");
       }
 
       children .slice (0, Math .max (children .length - this .CONSOLE_MAX, 0)) .remove ();
