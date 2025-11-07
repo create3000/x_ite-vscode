@@ -606,6 +606,25 @@ class X3DPreview
       }
    }
 
+   redirectConsoleMessages ()
+   {
+      const output = (log, command) =>
+      {
+         return (... args) =>
+         {
+            log .apply (console, args);
+
+            const message = args .join (" ");
+
+            vscode .postMessage ({ command, args: message });
+            this .addConsoleMessage (command, message);
+         };
+      }
+
+      for (const command of ["log", "info", "warn", "error", "debug"])
+         console [command] = output (console [command], command);
+   }
+
    CONSOLE_MAX = 1000;
 
    excludes = [
@@ -656,25 +675,6 @@ class X3DPreview
    openLinkInExternalBrowser (url)
    {
       vscode .postMessage ({ command: "open-link", url });
-   }
-
-   redirectConsoleMessages ()
-   {
-      const output = (log, command) =>
-      {
-         return (... args) =>
-         {
-            log .apply (console, args);
-
-            const message = args .join (" ");
-
-            vscode .postMessage ({ command, args: message });
-            this .addConsoleMessage (command, message);
-         };
-      }
-
-      for (const command of ["log", "info", "warn", "error", "debug"])
-         console [command] = output (console [command], command);
    }
 }
 
