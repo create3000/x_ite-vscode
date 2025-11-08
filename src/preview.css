@@ -199,7 +199,7 @@ x3d-canvas {
   margin-right: 3px;;
 }
 
-#console {
+.console {
   flex: 0 0 auto;
   overflow: scroll;
   max-height: 38.697%;
@@ -207,7 +207,7 @@ x3d-canvas {
   -background: var(--system-gray7);
 }
 
-#console p {
+.console p {
   box-sizing: border-box;
   position: relative;
   z-index: 0;
@@ -219,7 +219,7 @@ x3d-canvas {
   font-size: 8pt;
 }
 
-#console p:where(.warn, .error):before {
+.console p:where(.warn, .error):before {
   content: "";
   box-sizing: border-box;
   position: absolute;
@@ -231,50 +231,55 @@ x3d-canvas {
   height: 100%;
 }
 
-#console p:first-child {
+.console p:first-child {
   margin-top: 0px;
 }
 
-#console .info {
+.console .info {
   color: var(--system-blue);
 }
 
-#console p.warn {
+.console p.warn {
   border-top: 1px solid var(--system-yellow);
   border-bottom: 1px solid var(--system-yellow);
   color: black;
 }
 
-#console p.warn:before {
+.console p.warn:before {
   background-color: color-mix(in srgb, color-mix(in srgb, var(--system-yellow), white 50%), transparent 30%);
 }
 
-#console p.error {
+.console p.error {
   border-top: 1px solid var(--system-red);
   border-bottom: 1px solid var(--system-red);
   color: black;
 }
 
-#console p.error:before {
+.console p.error:before {
   background-color: color-mix(in srgb, color-mix(in srgb, var(--system-red), white 50%), transparent 30%);
 }
 
-#console p.warn:has(+ p.warn),
-#console p.error:has(+ p.error) {
+.console p.warn:has(+ p.warn),
+.console p.error:has(+ p.error) {
   border-bottom: none;
 }
 
-#console p.warn + p.warn,
-#console p.error + p.error {
+.console p.warn + p.warn,
+.console p.error + p.error {
   border-top: none;
 }
 
-#console p.splitter {
+.console p.warn:not(:has(+ p.warn)),
+.console p.error:not(:has(+ p.error)) {
+  margin-bottom: 2px;
+}
+
+.console p.splitter {
   margin: 5px 0px;
   border-top: 1px solid var(--system-gray3);
   padding: 0px;
 }
 
-#console p.splitter:first-child {
+.console p.splitter:first-child {
   display: none;
 }

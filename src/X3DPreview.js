@@ -641,7 +641,7 @@ class X3DPreview
       message = message .replaceAll ("https://file+.vscode-resource.vscode-cdn.net", "");
 
       const
-         console = $("#console") .show (),
+         console = $(".console") .show (),
          text    = $("<p></p>") .addClass (level) .text (message);
 
       if (performance .now () - this .#messageTime > 1000)
@@ -656,7 +656,7 @@ class X3DPreview
 
    clearConsole ()
    {
-      $("#console")
+      $(".console")
          .hide ()
          .empty ();
    }
