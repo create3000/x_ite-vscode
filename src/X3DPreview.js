@@ -587,22 +587,22 @@ class X3DPreview
       try
       {
          await browser .loadURL (new X3D .MFString (src));
+
+         if (browser .getWorldURL () === worldURL && activeViewpoint && browser .activeViewpoint)
+         {
+            const activeViewpoint = browser .activeViewpoint .getValue ();
+
+            activeViewpoint .setUserPosition (userPosition);
+            activeViewpoint .setUserOrientation (userOrientation);
+            activeViewpoint .setUserCenterOfRotation (userCenterOfRotation);
+            activeViewpoint .setFieldOfViewScale (fieldOfViewScale);
+            activeViewpoint .setNearDistance (nearDistance);
+            activeViewpoint .setFarDistance (farDistance);
+         }
       }
       catch (error)
       {
          console .error (error);
-      }
-
-      if (browser .getWorldURL () === worldURL && activeViewpoint && browser .activeViewpoint)
-      {
-         const activeViewpoint = browser .activeViewpoint .getValue ();
-
-         activeViewpoint .setUserPosition (userPosition);
-         activeViewpoint .setUserOrientation (userOrientation);
-         activeViewpoint .setUserCenterOfRotation (userCenterOfRotation);
-         activeViewpoint .setFieldOfViewScale (fieldOfViewScale);
-         activeViewpoint .setNearDistance (nearDistance);
-         activeViewpoint .setFarDistance (farDistance);
       }
    }
 
