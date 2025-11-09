@@ -20,7 +20,7 @@ DEF Script Script {
   url "ecmascript:
 function initialize ()
 {
-  console .log ('ecmascript', 123);
+  //console .log ('ecmascript', 123);
 }
 
 function set_debug (v, t)

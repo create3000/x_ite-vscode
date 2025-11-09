@@ -650,14 +650,13 @@ class X3DPreview
       this .#messageTime = performance .now ();
 
       console .children (`:not(:nth-last-child(-n+${this .CONSOLE_MAX}))`) .remove ();
-      console .css ("border", "") .append (text);
+      console .append (text);
       console .scrollTop (console .prop ("scrollHeight"));
    }
 
    clearConsole ()
    {
       $(".console")
-         .css ("border", "none")
          .hide ()
          .empty ();
    }
