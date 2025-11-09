@@ -1,4 +1,4 @@
-#X3D V4.1 utf8 X_ITE V12.1.4
+#X3D V4.0 utf8 X_ITE V12.1.5
 
 PROFILE Interchange
 
@@ -7,8 +7,8 @@ COMPONENT Scripting : 1
 
 META "created" "Mon, 08 Sep 2025 11:08:51 GMT"
 META "creator" "Holger Seelig"
-META "generator" "Sunrize X3D Editor V1.11.4, https://create3000.github.io/sunrize/"
-META "modified" "Fri, 07 Nov 2025 06:59:37 GMT"
+META "generator" "Sunrize X3D Editor V1.11.5, https://create3000.github.io/sunrize/"
+META "modified" "Sun, 09 Nov 2025 19:55:20 GMT"
 
 DEF Script Script {
   inputOnly SFTime set_debug
@@ -66,7 +66,7 @@ DEF Debug Transform {
       }
       geometry Box { }
     }
-    DEF Touch1_1 TouchSensor { }
+    DEF DebugTouch TouchSensor { }
   ]
 }
 
@@ -81,7 +81,7 @@ DEF Log Transform {
       }
       geometry Box { }
     }
-    DEF Touch2_1 TouchSensor { }
+    DEF LogTouch TouchSensor { }
   ]
 }
 
@@ -96,7 +96,7 @@ DEF Info Transform {
       }
       geometry Box { }
     }
-    DEF Touch1 TouchSensor { }
+    DEF InfoTouch TouchSensor { }
   ]
 }
 
@@ -111,7 +111,7 @@ DEF Warn Transform {
       }
       geometry Box { }
     }
-    DEF Touch2_2 TouchSensor { }
+    DEF WarnTouch TouchSensor { }
   ]
 }
 
@@ -126,12 +126,12 @@ DEF Error Transform {
       }
       geometry Box { }
     }
-    DEF Touch2 TouchSensor { }
+    DEF ErrorTouch TouchSensor { }
   ]
 }
 
-ROUTE Touch1_1.touchTime TO Script.set_debug
-ROUTE Touch2_1.touchTime TO Script.set_log
-ROUTE Touch1.touchTime TO Script.set_info
-ROUTE Touch2_2.touchTime TO Script.set_warn
-ROUTE Touch2.touchTime TO Script.set_error
+ROUTE LogTouch.touchTime TO Script.set_log
+ROUTE InfoTouch.touchTime TO Script.set_info
+ROUTE WarnTouch.touchTime TO Script.set_warn
+ROUTE ErrorTouch.touchTime TO Script.set_error
+ROUTE DebugTouch.touchTime TO Script.set_debug
