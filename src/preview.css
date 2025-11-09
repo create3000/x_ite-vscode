@@ -201,7 +201,7 @@ x3d-canvas {
 
 .console {
   flex: 0 0 auto;
-  overflow: scroll;
+  overflow-y: scroll;
   max-height: 38.697%;
   border-top: var(--border);
   -background: var(--system-gray7);
