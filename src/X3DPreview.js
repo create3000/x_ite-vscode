@@ -628,7 +628,7 @@ class X3DPreview
    CONSOLE_MAX = 1000;
 
    excludes = [
-      /AbortError:\s*signal is aborted/,
+      /aborted/i,
    ];
 
    #messageTime = 0;
