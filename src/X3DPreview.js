@@ -621,7 +621,7 @@ class X3DPreview
          };
       }
 
-      for (const command of ["log", "info", "warn", "error", "debug"])
+      for (const command of ["debug", "log", "info", "warn", "error"])
          console [command] = output (console [command], command);
    }
 
