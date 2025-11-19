@@ -568,18 +568,15 @@ class X3DPreview
       const
          browser         = this .#browser,
          worldURL        = browser .getWorldURL (),
-         activeViewpoint = browser .activeViewpoint ?.getValue ();
+         activeViewpoint = browser .getActiveViewpoint ();
 
-      if (activeViewpoint)
-      {
-         var
-            userPosition         = activeViewpoint .getUserPosition () .copy (),
-            userOrientation      = activeViewpoint .getUserOrientation () .copy (),
-            userCenterOfRotation = activeViewpoint .getUserCenterOfRotation () .copy (),
-            fieldOfViewScale     = activeViewpoint .getFieldOfViewScale (),
-            nearDistance         = activeViewpoint .getNearDistance (),
-            farDistance          = activeViewpoint .getFarDistance ();
-      }
+      const
+         userPosition         = activeViewpoint .getUserPosition () .copy (),
+         userOrientation      = activeViewpoint .getUserOrientation () .copy (),
+         userCenterOfRotation = activeViewpoint .getUserCenterOfRotation () .copy (),
+         fieldOfViewScale     = activeViewpoint .getFieldOfViewScale (),
+         nearDistance         = activeViewpoint .getNearDistance (),
+         farDistance          = activeViewpoint .getFarDistance ();
 
       // Clear any previous error before load succeeds or fails.
       this .clearConsole ();
@@ -588,9 +585,9 @@ class X3DPreview
       {
          await browser .loadURL (new X3D .MFString (src));
 
-         if (browser .getWorldURL () === worldURL && activeViewpoint && browser .activeViewpoint)
+         if (browser .getWorldURL () === worldURL)
          {
-            const activeViewpoint = browser .activeViewpoint .getValue ();
+            const activeViewpoint = browser .getActiveViewpoint ();
 
             activeViewpoint .setUserPosition (userPosition);
             activeViewpoint .setUserOrientation (userOrientation);
