@@ -37,7 +37,7 @@ Console messages from the preview are redirected to the Output panel of VS Code 
 
 ## Prerequisites
 
-Install one of these extensions for X3D VRML Classic Encoding:
+Install one of these extensions for XML and one for X3D VRML Classic Encoding:
 
 * https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml for XML (recommended)
 * https://marketplace.visualstudio.com/items?itemName=kagamma.cge-x3d-vscode for X3DV (recommended)
