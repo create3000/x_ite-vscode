@@ -609,7 +609,7 @@ class X3DPreview
    {
       const browser = this .#browser;
 
-      if (!browser .currentScene .encoding .match (/GLTF|OBJ|STL|PLY/))
+      if (!browser .currentScene .encoding .match (/^(?:GLTF|OBJ|STL|PLY)$/))
          return;
 
       browser .viewAll (0);
