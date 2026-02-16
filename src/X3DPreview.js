@@ -609,6 +609,9 @@ class X3DPreview
    {
       const browser = this .#browser;
 
+      if (browser .activeViewpoint)
+         return;
+
       if (!browser .currentScene .encoding .match (/^(?:GLTF|OBJ|STL|PLY)$/))
          return;
 
