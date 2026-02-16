@@ -35,6 +35,8 @@ class X3DPreview
 
    constructor ()
    {
+      this .redirectConsoleMessages ();
+
       this .#localStorage .setDefaultValues ({
          toolbarVisible: true,
          toolbarRevealed: true,
@@ -50,13 +52,13 @@ class X3DPreview
 
       window .open = url => this .openLinkInExternalBrowser (url);
 
-      this .redirectConsoleMessages ();
-      this .updateToolbar ();
       this .#browser .getContextMenu () .setUserMenu (() => this .createUserMenu ());
-      this .#browser .addBrowserCallback (this, X3D .X3DConstants .INITIALIZED_EVENT, () => this .updateToolbar ());
+      this .#browser .addBrowserCallback ("updateToolbar", X3D .X3DConstants .INITIALIZED_EVENT, () => this .updateToolbar ());
+      this .#browser .addBrowserCallback ("viewAll",       X3D .X3DConstants .INITIALIZED_EVENT, () => this .viewAll ());
 
       this .updateToolbar ();
       this .updateMute ();
+      this .viewAll ();
    }
 
    updateToolbar ()
@@ -601,6 +603,16 @@ class X3DPreview
       {
          console .error (error);
       }
+   }
+
+   viewAll ()
+   {
+      const browser = this .#browser;
+
+      if (browser .currentScene .encoding !== "GLTF")
+         return;
+
+      browser .viewAll (0);
    }
 
    redirectConsoleMessages ()
