@@ -2,7 +2,7 @@
   "name": "x-ite-vscode",
   "publisher": "create3000",
   "displayName": "X_ITE VS Code Extension",
-  "description": "Preview and debug X3D, VRML, glTF and other 3D models directly in the editor.",
+  "description": "Preview and Debug X3D, VRML, glTF and Other 3D Models Directly in the Editor",
   "version": "2.0.2",
   "license": "MIT",
   "icon": "images/icon.png",
