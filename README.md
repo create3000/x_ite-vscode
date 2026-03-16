@@ -17,17 +17,18 @@ With this extension you can preview 3D files in X_ITE. A new VS Code column is o
 
 ## Supported File Formats
 
-| Encoding         | File Extension | MIME Type       |
-|------------------|----------------|-----------------|
-| X3D XML          | .x3d, .x3dz    | model/x3d+xml   |
-| X3D JSON         | .x3dj, .x3djz  | model/x3d+json  |
-| X3D Classic VRML | .x3dv, .x3dvz  | model/x3d+vrml  |
-| VRML             | .wrl, .wrz     | model/vrml      |
-| glTF             | .gltf, .glb    | model/gltf+json |
-| Wavefront OBJ    | .obj           | model/obj       |
-| STL              | .stl           | model/stl       |
-| PLY              | .ply           | model/ply       |
-| SVG Document     | .svg, .svgz    | image/svg+xml   |
+| Encoding         | File Extension | MIME Type         |
+|------------------|----------------|-------------------|
+| X3D XML          | .x3d, .x3dz    | model/x3d+xml     |
+| X3D JSON         | .x3dj, .x3djz  | model/x3d+json    |
+| X3D Classic VRML | .x3dv, .x3dvz  | model/x3d+vrml    |
+| VRML 2.0         | .wrl, .wrz     | model/vrml        |
+| glTF             | .gltf, .glb    | model/gltf+json   |
+| VRM              | .vrm           | model/vrm         |
+| Wavefront OBJ    | .obj           | model/obj         |
+| STL              | .stl           | model/stl         |
+| PLY              | .ply           | model/ply         |
+| SVG Document     | .svg, .svgz    | image/svg+xml     |
 
 ## Console Output
 
