@@ -126,7 +126,11 @@ DEF Error Transform {
       }
       geometry Box { }
     }
-    DEF ErrorTouch TouchSensor { }
+    DEF ErrorTouch TouchSensor {
+      enabled FALSE
+      description "Error is disabled to show that it is possible to disable logging levels."
+      offset 0.5 0.5 0
+    }
   ]
 }
 
@@ -135,3 +139,5 @@ ROUTE InfoTouch.touchTime TO Script.set_info
 ROUTE WarnTouch.touchTime TO Script.set_warn
 ROUTE ErrorTouch.touchTime TO Script.set_error
 ROUTE DebugTouch.touchTime TO Script.set_debug
+
+EXPORT DebugTouch AS DebugTouchFoo
