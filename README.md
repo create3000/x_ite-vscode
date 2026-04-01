@@ -5,7 +5,7 @@
 
 This extension integrates the [X_ITE X3D Browser](https://create3000.github.io/x_ite/) into VS Code and compatible editors.
 
-## Preview and debug X3D, VRML, glTF and other 3D models directly in the editor.
+## Preview and Debug X3D, VRML, glTF and Other 3D Models Directly in the Editor
 
 ![X3D Logo Pieces](images/logo-pieces.png)
 
