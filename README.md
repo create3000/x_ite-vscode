@@ -41,8 +41,7 @@ Console messages from the preview are redirected to the Output panel of VS Code 
 
 Install these extensions for X3D Classic VRML Encoding and for VRML 2.0 and one for XML:
 
-* [X3D VRML Classic Encoding Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=create3000.x3d-vscode-syntax-highlighting) for X3DV and VRML (recommended)
-* [Red Hat XML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml) for XML (recommended)
+* [X3D Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=create3000.x3d-vscode-syntax-highlighting) for X3D, X3DV, X3DJ and VRML 2.0 (recommended)
 
 ## License
 
