@@ -37,16 +37,11 @@ Console messages from the preview are redirected to the Output panel of VS Code 
 
 ![Output](images/output.png)
 
-## Prerequisites
-
-Install these extensions for X3D syntax highlighting:
-
-* [X3D Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=create3000.x3d-vscode-syntax-highlighting) for X3D, X3DV, X3DJ and VRML 2.0 (recommended)
-
 ## License
 
 This software is licensed under the [MIT License](LICENSE.md).
 
 ## See Also
 
+* [X3D Syntax Highlighting](https://marketplace.visualstudio.com/items?itemName=create3000.x3d-vscode-syntax-highlighting)
 * [X_ITE VS Code Formatter](https://marketplace.visualstudio.com/items?itemName=create3000.x-ite-vscode-formatter)

@@ -59,6 +59,10 @@
     "eslint": "^9.21.0",
     "shell-tools": "^1.1.9"
   },
+  "extensionDependencies": [
+    "create3000.x3d-vscode-syntax-highlighting",
+    "create3000.x-ite-vscode-formatter"
+  ],
   "engines": {
     "vscode": "^1.93.0"
   },
