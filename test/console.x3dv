@@ -1,4 +1,4 @@
-#X3D V4.0 utf8 X_ITE V12.1.5
+#X3D V4.1 utf8 X_ITE V14.1.2
 
 PROFILE Interchange
 
@@ -126,11 +126,7 @@ DEF Error Transform {
       }
       geometry Box { }
     }
-    DEF ErrorTouch TouchSensor {
-      enabled FALSE
-      description "Error is disabled to show that it is possible to disable logging levels."
-      offset 0.5 0.5 0
-    }
+    DEF ErrorTouch TouchSensor { }
   ]
 }
 
