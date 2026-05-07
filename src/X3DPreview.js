@@ -572,13 +572,14 @@ class X3DPreview
          worldURL        = browser .getWorldURL (),
          activeViewpoint = browser .getActiveViewpoint ();
 
+      // If there is no active layer, then active viewpoint is null.
       const
-         userPosition         = activeViewpoint .getUserPosition () .copy (),
-         userOrientation      = activeViewpoint .getUserOrientation () .copy (),
-         userCenterOfRotation = activeViewpoint .getUserCenterOfRotation () .copy (),
-         fieldOfViewScale     = activeViewpoint .getFieldOfViewScale (),
-         nearDistance         = activeViewpoint .getNearDistance (),
-         farDistance          = activeViewpoint .getFarDistance ();
+         userPosition         = activeViewpoint ?.getUserPosition () .copy (),
+         userOrientation      = activeViewpoint ?.getUserOrientation () .copy (),
+         userCenterOfRotation = activeViewpoint ?.getUserCenterOfRotation () .copy (),
+         fieldOfViewScale     = activeViewpoint ?.getFieldOfViewScale (),
+         nearDistance         = activeViewpoint ?.getNearDistance (),
+         farDistance          = activeViewpoint ?.getFarDistance ();
 
       // Clear any previous error before load succeeds or fails.
       this .clearConsole ();
@@ -589,14 +590,18 @@ class X3DPreview
 
          if (browser .getWorldURL () === worldURL)
          {
+            // If there is no active layer, then active viewpoint is null.
             const activeViewpoint = browser .getActiveViewpoint ();
 
-            activeViewpoint .setUserPosition (userPosition);
-            activeViewpoint .setUserOrientation (userOrientation);
-            activeViewpoint .setUserCenterOfRotation (userCenterOfRotation);
-            activeViewpoint .setFieldOfViewScale (fieldOfViewScale);
-            activeViewpoint .setNearDistance (nearDistance);
-            activeViewpoint .setFarDistance (farDistance);
+            if (activeViewpoint && userPosition)
+            {
+               activeViewpoint .setUserPosition (userPosition);
+               activeViewpoint .setUserOrientation (userOrientation);
+               activeViewpoint .setUserCenterOfRotation (userCenterOfRotation);
+               activeViewpoint .setFieldOfViewScale (fieldOfViewScale);
+               activeViewpoint .setNearDistance (nearDistance);
+               activeViewpoint .setFarDistance (farDistance);
+            }
          }
       }
       catch (error)
