@@ -35,6 +35,8 @@ class X3DWindow
       switch (textEditor ?.document ?.languageId ?.toLowerCase ())
       {
          case "x3d":
+         case "x3dj":
+         case "x3dv":
          case "vrml":
          case "wavefront-obj":
          case "stlascii":

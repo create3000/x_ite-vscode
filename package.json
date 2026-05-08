@@ -71,6 +71,8 @@
   ],
   "activationEvents": [
     "onLanguage:X3D",
+    "onLanguage:X3DJ",
+    "onLanguage:X3DV",
     "onLanguage:VRML",
     "onLanguage:xml",
     "onLanguage:json",
