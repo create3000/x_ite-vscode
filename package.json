@@ -70,10 +70,10 @@
     "Debuggers"
   ],
   "activationEvents": [
-    "onLanguage:X3D",
-    "onLanguage:X3DJ",
-    "onLanguage:X3DV",
-    "onLanguage:VRML",
+    "onLanguage:x3d",
+    "onLanguage:x3dj",
+    "onLanguage:x3dv",
+    "onLanguage:vrml",
     "onLanguage:xml",
     "onLanguage:json",
     "onLanguage:wavefront-obj",
