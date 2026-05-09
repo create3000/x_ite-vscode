@@ -33,7 +33,7 @@ With this extension you can preview 3D files in X_ITE. A new VS Code column is o
 
 ## Console Output
 
-Console messages are directly visible in the Preview tab. Additionally, console messages are redirected to the Output panel of VS Code when switching to the "X_ITE" channel.
+Console messages are directly visible in the Preview tab if any. Additionally, console messages are redirected to the Output panel of VS Code when switching to the "X_ITE" channel.
 
 ![Output](images/output.png)
 
