@@ -51,12 +51,14 @@
     "release": "node build/release.js"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "22.13.5",
     "@types/vscode": "^1.93.0",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
-    "eslint": "^9.21.0",
+    "eslint": "^9.39.4",
+    "globals": "^17.6.0",
     "shell-tools": "^1.1.9"
   },
   "extensionDependencies": [
