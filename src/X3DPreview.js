@@ -636,7 +636,7 @@ class X3DPreview
             vscode .postMessage ({ command, args: message });
             this .addConsoleMessage (command, message);
          };
-      }
+      };
 
       for (const command of ["debug", "log", "info", "warn", "error"])
          console [command] = output (console [command], command);
