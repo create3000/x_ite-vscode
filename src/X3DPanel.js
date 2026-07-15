@@ -87,7 +87,7 @@ class X3DPanel
    getWebviewContent (panel)
    {
       const
-         script = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.js"))),
+         script = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.mjs"))),
          css    = panel .webview .asWebviewUri (vscode .Uri .file (path .join (__dirname, "preview.css"))),
          src    = panel .webview .asWebviewUri (vscode .Uri .file (panel .textEditor .document .fileName,));
 
