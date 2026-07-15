@@ -7,14 +7,16 @@ export default defineConfig ([
     files: ["**/*.{js,mjs,cjs}"],
     plugins: { js },
     extends: ["js/recommended"],
-    languageOptions: {
+    languageOptions:
+    {
       globals:
       {
         ... globals .browser,
         ... globals .node,
       }
     },
-    rules: {
+    rules:
+    {
       "no-async-promise-executor": "off",
       "no-empty": ["error", { "allowEmptyCatch": true }],
       "semi": "error",
