@@ -101,11 +101,12 @@ class X3DPanel
 </head>
 <body>
    <x3d-canvas
-         debug="true"
          cache="false"
-         splashScreen="false"
          contentScale="auto"
-         src="${src}">
+         debug="true"
+         splashScreen="false"
+         src="${src}"
+         update="auto">
    </x3d-canvas>
    <div class="console" title="Console"></div>
 </body>
