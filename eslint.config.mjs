@@ -29,4 +29,13 @@ export default defineConfig ([
       sourceType: "commonjs",
     }
   },
+  {
+    files: ["**/X3DPreview.js"],
+    languageOptions:
+    {
+      globals: {
+        ... globals .jquery,
+      },
+    }
+  },
 ]);
