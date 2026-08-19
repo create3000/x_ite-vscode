@@ -568,9 +568,10 @@ class X3DPreview
    async loadURL (src)
    {
       const
-         browser         = this .#browser,
-         worldURL        = browser .getWorldURL (),
-         activeViewpoint = browser .getActiveViewpoint ();
+         browser              = this .#browser,
+         worldURL             = browser .getWorldURL (),
+         activeViewpoint      = browser .getActiveViewpoint (),
+         activeNavigationInfo = browser .getActiveNavigationInfo ();
 
       // If there is no active layer, then active viewpoint is null.
       const
@@ -578,8 +579,8 @@ class X3DPreview
          userOrientation      = activeViewpoint ?.getUserOrientation () .copy (),
          userCenterOfRotation = activeViewpoint ?.getUserCenterOfRotation () .copy (),
          fieldOfViewScale     = activeViewpoint ?.getFieldOfViewScale (),
-         nearDistance         = activeViewpoint ?.getNearDistance (),
-         farDistance          = activeViewpoint ?.getFarDistance ();
+         nearDistance         = activeViewpoint ?.getNearDistance (activeNavigationInfo),
+         farDistance          = activeViewpoint ?.getFarDistance (activeNavigationInfo);
 
       // Clear any previous error before load succeeds or fails.
       this .clearConsole ();
