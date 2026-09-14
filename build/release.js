@@ -18,7 +18,7 @@ function bump ()
 	}
 	catch (error)
 	{
-		console .error (error);
+		console .warn (error .message);
 	}
 
 	systemSync (`npm version patch --no-git-tag-version --force`);
